@@ -17,13 +17,13 @@ import (
 func HandleFSM(bot *api.Bot, message *api.Message, data string) {
 	switch data {
 	case string(fsm.StateUsername):
-		waitUsername(bot, message)
+		waitUsernameStars(bot, message)
 	case string(fsm.StateAmount):
 		waitAmount(bot, message)
 	}
 }
 
-func waitUsername(bot *api.Bot, message *api.Message) {
+func waitUsernameStars(bot *api.Bot, message *api.Message) {
 	tr := i18n.ForUser(message.From.ID)
 	username := message.Text
 	session, ok := fsm.UserFSM.Get(message.From.ID)
@@ -32,7 +32,7 @@ func waitUsername(bot *api.Bot, message *api.Message) {
 	}
 
 	utils.DeleteMessage(bot, message)
-	utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("menu.buy_list.stars.self").Format("MIN_STARS", config.Cfg.MIN_STARS, "MAX_STARS", config.Cfg.MAX_STARS, "username", username), botpkg.AnotherStar(tr.Language()))
+	utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("menu.buy_list.stars.self").Format("MIN_STARS", config.Cfg.MIN_STARS, "MAX_STARS", config.Cfg.MAX_STARS, "username", username), botpkg.AnotherPurchase(tr.Language(), "stars"))
 	session.State = fsm.StateAmount
 	fsm.UserFSM.Set(message.From.ID, session)
 	fsm.UserFSM.SetUsername(message.From.ID, username)

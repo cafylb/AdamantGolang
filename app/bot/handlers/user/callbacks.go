@@ -57,25 +57,45 @@ func HandleCallback(bot *api.Bot, callback *api.CallbackQuery) {
 		username := dataP[1]
 		payment(bot, callback, tr, amount, username)
 	} else if strings.HasPrefix(data, "gift_purchase") {
-		giftID, err := strconv.Atoi(strings.TrimPrefix(data, "gift_purchase_"))
+		dataP := strings.Split(strings.TrimPrefix(data, "gift_purchase_"), "_")
+		giftID, err := strconv.Atoi(dataP[0])
+		if err != nil {
+			log.Println(err)
+		}
+		anonimInt, err := strconv.Atoi(dataP[1])
+		if err != nil {
+			log.Println(err)
+		}
+		giftPurchase(bot, callback, tr, giftID, anonimInt != 0)
+	} else if strings.HasPrefix(data, "premium_purchase_") {
+		premiumLength, err := strconv.Atoi(strings.TrimPrefix(data, "premium_purchase_"))
 		if err != nil {
 			log.Println(err)
 		}
 
-		giftPurchase(bot, callback, tr, giftID)
+		premiumPurchase(bot, callback, tr, premiumLength)
 	}
 
 	switch data {
-	case "purchase": purchase(bot, callback, tr)
-	case "choose_language": chooseLanguage(bot, callback, tr)
-	case "set_language_ru", "set_language_en", "set_language_uz": changeLanguage(bot, callback, tr, callback.Data)
-	case "premium_purchase": premiumPurchase(bot, callback, tr)
-	case "stars_purchase": starsPurchase(bot, callback, tr)
-	case "gifts_purchase": giftsPruchase(bot, callback, tr)
-	case "buy_stars_friend": buyStarsFriend(bot, callback, tr)
+	case "purchase":
+		purchase(bot, callback, tr)
+	case "choose_language":
+		chooseLanguage(bot, callback, tr)
+	case "set_language_ru", "set_language_en", "set_language_uz":
+		changeLanguage(bot, callback, tr, callback.Data)
+	case "premium_purchase":
+		premiumPurchase(bot, callback, tr)
+	case "stars_purchase":
+		starsPurchase(bot, callback, tr)
+	case "gifts_purchase":
+		giftsPruchase(bot, callback, tr)
+	case "buy_stars_friend":
+		buyStarsFriend(bot, callback, tr)
 	case "buy_gifts_friend":
-	case "cancel": cancelPurchase(bot, callback, tr)
-	case "nothing": nothing(bot, callback, tr)
+	case "cancel":
+		cancelPurchase(bot, callback, tr)
+	case "nothing":
+		nothing(bot, callback, tr)
 	}
 }
 
@@ -89,13 +109,23 @@ func purchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer) {
 	utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.self").String(), botpkg.BuyList(tr.Language()))
 }
 
-func premiumPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer) {
-	utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())
+func premiumPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, length int, user ...string) {
+	utils.CallbackAnswer(bot, callback)
+	username := callback.From.Username
+	if len(user) > 0 && user[0] != "" {
+		username = user[0]
+	}
+
+	if username != "" {
+		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.premium.self").Format("username", callback.From.Username), botpkg.AnotherPurchase(tr.Language(), "premium"))
+	} else {
+		utils.Edit(bot, callback.Message.Message(), tr.Get("").String(), botpkg.AnotherPurchase(tr.Language(), "premium"))
+	}
 }
 
-func giftPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, giftID int) {
+func giftPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, giftID int, anonim bool) {
 	utils.CallbackAnswer(bot, callback)
-	
+	utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.gifts.selected").Format("emojiID", botpkg.Gifts[giftID].EmojiID, "emojiIcon", botpkg.Gifts[giftID].Icon), botpkg.GiftSelected(tr.Language(), giftID, anonim))
 }
 
 func giftsPruchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, page ...int) {
@@ -131,9 +161,9 @@ func starsPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer,
 	if username != "" {
 		fsm.UserFSM.SetState(callback.From.ID, fsm.StateAmount, callback.Message.Message().MessageID)
 		fsm.UserFSM.SetUsername(callback.From.ID, username)
-		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.stars.self").Format("MIN_STARS", config.Cfg.MIN_STARS, "MAX_STARS", config.Cfg.MAX_STARS, "username", username), botpkg.AnotherStar(tr.Language()))
+		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.stars.self").Format("MIN_STARS", config.Cfg.MIN_STARS, "MAX_STARS", config.Cfg.MAX_STARS, "username", username), botpkg.AnotherPurchase(tr.Language(), "stars"))
 	} else {
-		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.stars.username_self_error").String(), botpkg.AnotherStar(tr.Language()))
+		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.stars.username_self_error").String(), botpkg.AnotherPurchase(tr.Language(), "stars"))
 	}
 }
 
