@@ -312,7 +312,7 @@ func (client *Fragment) CheckUsername(ctx context.Context, username string) (str
 		"quantity": "",
 	})
 	if err != nil {
-		return "", nil
+		return "", err
 	}
 
 	found, _ := payload["found"].(map[string]any)
@@ -328,6 +328,7 @@ func (client *Fragment) RefreshHash(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	req.Header.Set("Cache-Control", "no-cache")
 	addCookies(req, client.cookies)
 
 	resp, err := client.httpClient.Do(req)
@@ -335,6 +336,13 @@ func (client *Fragment) RefreshHash(ctx context.Context) error {
 		return fmt.Errorf("%w: %v", ErrFragmentClient, err)
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusUnauthorized || resp.StatusCode == http.StatusForbidden {
+		return fmt.Errorf("%w: fragment home rejected cookies", ErrFragmentAuth)
+	}
+	if resp.StatusCode >= http.StatusBadRequest {
+		return fmt.Errorf("%w: fragment home status %d", ErrFragmentClient, resp.StatusCode)
+	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {

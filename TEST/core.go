@@ -25,6 +25,26 @@ func EnsureCore(ctx context.Context, db *pgxpool.Pool) error {
 	return err
 }
 
+/*
+смотри основываясь на том рисунке
+проверь все [gifts.go](app/bot/services/gifts.go) , [fragment.go](app/bot/services/fragment.go) , [cryptomus.go](app/bot/services/cryptomus.go) на работоспособность и 100% надеждность
+можешь исправить все сразу, но не меняй код снаружи файлов
+по ним давай отчет мне
+также напиши [ton.go](TEST/ton.go) , [convertor.go](app/bot/services/convertor.go) также чтобы полностью работали
+
+смысл convertor.go:
+курс и фукнция коверта долларов в TON
+также конвертация долларов в рубли
+
+их смысл такой
+я еще сделал [core.go](TEST/core.go) 
+cryptomus должен работать на вебхуке помни это
+а вот [ton.go](app/bot/services/ton.go) и [convertor.go](app/bot/services/convertor.go)  должны работать в циклах
+каждые 10 секунд ton.go проверяет транзакции, и каждые 5 минут обновляет глобальный курс в боте [convertor.go](app/bot/services/convertor.go) 
+в старте бота они оба работают одновременно
+оба [ton.go](app/bot/services/ton.go) и [convertor.go](app/bot/services/convertor.go)  управляются с помощью [core.go](app/bot/core/core.go)
+*/
+
 func GetCore(ctx context.Context, db *pgxpool.Pool) (Core, error) {
 	var core Core
 

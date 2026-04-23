@@ -280,6 +280,16 @@ func (manager *GiftManager) Transfer(ctx context.Context, nft *Nft, person int64
 	}
 }
 
+func (manager *GiftManager) TransferByUsername(ctx context.Context, nft *Nft, username string) (bool, int64, error) {
+	user, err := manager.resolveUsername(ctx, username)
+	if err != nil {
+		return false, 0, err
+	}
+
+	ok, err := manager.Transfer(ctx, nft, user.ID())
+	return ok, user.ID(), err
+}
+
 func (manager *GiftManager) TransferAll(ctx context.Context, person int64) error {
 	gifts, err := manager.Get(ctx)
 	if err != nil {
@@ -321,6 +331,81 @@ func (manager *GiftManager) RandomTransfer(ctx context.Context, person int64) (b
 	}
 
 	return true, nft, nil
+}
+
+func (manager *GiftManager) RandomTransferByUsername(ctx context.Context, username string) (bool, *Nft, int64, error) {
+	user, err := manager.resolveUsername(ctx, username)
+	if err != nil {
+		return false, nil, 0, err
+	}
+
+	ok, nft, err := manager.RandomTransfer(ctx, user.ID())
+	if err != nil {
+		return false, nil, user.ID(), err
+	}
+
+	return ok, nft, user.ID(), nil
+}
+
+func (manager *GiftManager) SendPremium(ctx context.Context, person int64, months int, message string) (bool, error) {
+	if months <= 0 {
+		return false, fmt.Errorf("months must be positive")
+	}
+
+	api, peerManager, err := manager.clients(ctx)
+	if err != nil {
+		return false, err
+	}
+
+	user, err := peerManager.ResolveUserID(ctx, person)
+	if err != nil {
+		return false, err
+	}
+
+	options, err := api.PaymentsGetPremiumGiftCodeOptions(ctx, &tg.PaymentsGetPremiumGiftCodeOptionsRequest{})
+	if err != nil {
+		return false, err
+	}
+
+	if !supportsPremiumMonths(options, months) {
+		return false, fmt.Errorf("telegram does not offer premium gift option for %d month(s) in XTR", months)
+	}
+
+	invoice := &tg.InputInvoicePremiumGiftStars{
+		UserID: user.InputUser(),
+		Months: months,
+	}
+
+	if text := strings.TrimSpace(message); text != "" {
+		invoice.SetMessage(tg.TextWithEntities{Text: text})
+	}
+
+	form, err := api.PaymentsGetPaymentForm(ctx, &tg.PaymentsGetPaymentFormRequest{
+		Invoice: invoice,
+	})
+	if err != nil {
+		return false, err
+	}
+
+	formIDProvider, ok := form.(interface{ GetFormID() int64 })
+	if !ok {
+		return false, fmt.Errorf("payment form does not contain form_id")
+	}
+
+	if err := manager.sendStarsForm(ctx, api, formIDProvider.GetFormID(), invoice); err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
+
+func (manager *GiftManager) SendPremiumByUsername(ctx context.Context, username string, months int, message string) (bool, error) {
+	user, err := manager.resolveUsername(ctx, username)
+	if err != nil {
+		return false, err
+	}
+
+	return manager.SendPremium(ctx, user.ID(), months, message)
 }
 
 func (manager *GiftManager) run(ctx context.Context, client *telegram.Client, peerManager *peers.Manager, wait chan struct{}, done chan struct{}) {
@@ -494,19 +579,65 @@ func (manager *GiftManager) transferPaid(ctx context.Context, api *tg.Client, gi
 		return false, fmt.Errorf("payment form не содержит form_id")
 	}
 
-	paid, err := api.PaymentsSendStarsForm(ctx, &tg.PaymentsSendStarsFormRequest{
-		FormID:  formIDProvider.GetFormID(),
-		Invoice: invoice,
-	})
-	if err != nil {
+	if err := manager.sendStarsForm(ctx, api, formIDProvider.GetFormID(), invoice); err != nil {
 		return false, err
-	}
-	if paid == nil {
-		return false, fmt.Errorf("не удалось оплатить перевод подарка")
 	}
 
 	log.Printf("Платно отправлен %s пользователю %d", nft.Link, person)
 	return true, nil
+}
+
+func (manager *GiftManager) resolveUsername(ctx context.Context, username string) (peers.User, error) {
+	_, peerManager, err := manager.clients(ctx)
+	if err != nil {
+		return peers.User{}, err
+	}
+
+	peer, err := peerManager.Resolve(ctx, strings.TrimSpace(username))
+	if err != nil {
+		return peers.User{}, err
+	}
+
+	user, ok := peer.(peers.User)
+	if !ok {
+		return peers.User{}, fmt.Errorf("resolved peer %q is not a user", username)
+	}
+
+	return user, nil
+}
+
+func (manager *GiftManager) sendStarsForm(ctx context.Context, api *tg.Client, formID int64, invoice tg.InputInvoiceClass) error {
+	for {
+		paid, err := api.PaymentsSendStarsForm(ctx, &tg.PaymentsSendStarsFormRequest{
+			FormID:  formID,
+			Invoice: invoice,
+		})
+		if err == nil {
+			if paid == nil {
+				return fmt.Errorf("telegram returned empty payment result")
+			}
+			return nil
+		}
+
+		wait, ok := telegram.AsFloodWait(err)
+		if !ok {
+			return err
+		}
+
+		if err := waitContext(ctx, wait+time.Second); err != nil {
+			return err
+		}
+	}
+}
+
+func supportsPremiumMonths(options []tg.PremiumGiftCodeOption, months int) bool {
+	for _, option := range options {
+		if option.GetCurrency() == "XTR" && option.GetMonths() == months {
+			return true
+		}
+	}
+
+	return false
 }
 
 func newNft(slug string, num int, msgID int) Nft {
