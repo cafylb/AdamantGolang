@@ -13,7 +13,7 @@ type Config struct {
 	Username  string
 	MIN_STARS int32
 	MAX_STARS int32
-	Price     float32
+	Price     float64
 
 	DB          string
 	FSM_STORAGE string
@@ -53,7 +53,7 @@ func Load() *Config {
 		Username:            get("BOT_USERNAME"),
 		MIN_STARS:           getInt32("MIN_STARS"),
 		MAX_STARS:           getInt32("MAX_STARS"),
-		Price:               getFloat32("PRICE"),
+		Price:               getFloat64("PRICE"),
 		DB:                  get("DB"),
 		FSM_STORAGE:         getDefault("FSM_STORAGE", "redis"),
 		REDIS_URL:           getDefault("REDIS_URL", "redis://127.0.0.1:6379/0"),
@@ -116,7 +116,7 @@ func getInt64(key string) int64 {
 	return num
 }
 
-func getFloat32(key string) float32 {
+func getFloat64(key string) float64 {
 	value := get(key)
 
 	num, err := strconv.ParseFloat(value, 32)
@@ -124,7 +124,7 @@ func getFloat32(key string) float32 {
 		log.Fatal("invalid ", key, ": ", err)
 	}
 
-	return float32(num)
+	return float64(num)
 }
 
 var Cfg = Load()

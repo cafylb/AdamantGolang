@@ -1,3 +1,7 @@
 stars pattern:  stars-{amount}-{username}-{amount_ton}-{system} //stars-100-cafylb-1.1-ton
 gifts pattern: gifts-{gift_id}-{username}-{memo}-{system} //gfits-6574-cafylb-for you babe-ton
 premium: premium-{duration}-{username}-{system} //premium-3-cafylb-ton
+
+in proccess:
+stars-{amount}-{username} //stars-100-cafylb
+gifts pattern: gifts-{gift_id}-{username}-{memo} //gfits-6574-cafylb-for you babe-ton

@@ -4,6 +4,7 @@ import (
 	botpkg "adamant/app/bot"
 	i18n "adamant/app/bot/core/i18n"
 	utils "adamant/app/bot/utils"
+	"strconv"
 
 	api "github.com/mymmrac/telego"
 )
@@ -12,9 +13,12 @@ func HandleCommand(bot *api.Bot, msg *api.Message) {
 	tr := i18n.ForUser(msg.From.ID)
 
 	switch utils.Commands(msg) {
-	case "start": startHand(bot, msg, tr)
-	case "language": languageHand(bot, msg, tr)
-	case "id": Id(bot, msg, tr)
+	case "start":
+		startHand(bot, msg, tr)
+	case "language":
+		languageHand(bot, msg, tr)
+	case "id":
+		Id(bot, msg, tr)
 	}
 }
 
@@ -28,5 +32,6 @@ func languageHand(bot *api.Bot, msg *api.Message, tr i18n.Localizer) {
 }
 
 func Id(bot *api.Bot, msg *api.Message, tr i18n.Localizer) {
-	utils.Reply(bot, msg, tr.Get("menu.id").Format("tg_id", msg.From.ID), botpkg.Copy(tr.Language(), string(msg.From.ID)))
+	userID := strconv.FormatInt(msg.From.ID, 10)
+	utils.Reply(bot, msg, tr.Get("menu.id").Format("tg_id", msg.From.ID), botpkg.Copy(tr.Language(), userID))
 }

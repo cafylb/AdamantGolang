@@ -18,6 +18,8 @@
         "username_error": "<b>Foydalanuvchi nomi to'g'riligini tekshiring <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nUshbu foydalanuvchi nomi tekshiruvdan o'tmadi, to'g'riligiga ishonch hosil qiling va qaytadan urinib ko'ring"
       },
       "gifts": {
+        "username": "<b>Iltimos, sovg'a yuboriladigan foydalanuvchi nomini kiriting <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>вќ—пёЏ</tg-emoji>",
+        "comment_input": "<b>Sovg'a uchun izoh yuboring <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\n255 tagacha belgi yuborishingiz mumkin.",
         "self": "Sotib olmoqchi bo'lgan sovg'angizni tanlang <tg-emoji emoji-id='6037175527846975726'>🎁</tg-emoji>"
       }
     },
@@ -115,6 +117,7 @@
       "stars": "Yulduzlar",
       "premium": "Premium obuna",
       "gifts": "Sovg'a sotib olish",
+      "another": "Yuboruvchini o'zgartirish",
       "another_star": "Yuboruvchini o'zgartirish"
     }
   },

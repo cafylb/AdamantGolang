@@ -10,16 +10,23 @@ import (
 	"adamant/app/bot/utils"
 	"context"
 	"strconv"
+	"strings"
 
 	api "github.com/mymmrac/telego"
 )
 
 func HandleFSM(bot *api.Bot, message *api.Message, data string) {
 	switch data {
-	case string(fsm.StateUsername):
+	case string(fsm.StateUsernameStars):
 		waitUsernameStars(bot, message)
+	case string(fsm.StateUsernamePremium):
+		waitUsernamePremium(bot, message)
+	case string(fsm.StateUsernameGifts):
+		waitUsernameGifts(bot, message)
 	case string(fsm.StateAmount):
 		waitAmount(bot, message)
+	case string(fsm.StateMemo):
+		waitGiftMemo(bot, message)
 	}
 }
 
@@ -34,8 +41,8 @@ func waitUsernameStars(bot *api.Bot, message *api.Message) {
 	utils.DeleteMessage(bot, message)
 	utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("menu.buy_list.stars.self").Format("MIN_STARS", config.Cfg.MIN_STARS, "MAX_STARS", config.Cfg.MAX_STARS, "username", username), botpkg.AnotherPurchase(tr.Language(), "stars"))
 	session.State = fsm.StateAmount
+	session.Username = username
 	fsm.UserFSM.Set(message.From.ID, session)
-	fsm.UserFSM.SetUsername(message.From.ID, username)
 }
 
 func waitAmount(bot *api.Bot, message *api.Message) {
@@ -62,7 +69,83 @@ func waitAmount(bot *api.Bot, message *api.Message) {
 		int64(session.MessageID),
 		message.Chat.ID,
 		tr.Payment("source").Format("adamant_balance", fsmUserBalance(message.From.ID)),
-		botpkg.PaymentSource(tr.Language(), amount, username),
+		botpkg.PaymentSource(tr.Language(), utils.GenerateOrderData("stars", amount, username)),
+	)
+	fsm.UserFSM.Clear(message.From.ID)
+}
+
+func waitUsernamePremium(bot *api.Bot, message *api.Message) {
+	tr := i18n.ForUser(message.From.ID)
+	username := strings.TrimSpace(message.Text)
+	session, ok := fsm.UserFSM.Get(message.From.ID)
+	if !ok {
+		return
+	}
+
+	utils.DeleteMessage(bot, message)
+	session.State = fsm.StateIdle
+	session.Username = username
+	fsm.UserFSM.Set(message.From.ID, session)
+
+	utils.EditById(
+		bot,
+		int64(session.MessageID),
+		message.Chat.ID,
+		tr.Get("menu.buy_list.premium.self").Format("username", username),
+		botpkg.Premium(tr.Language()),
+	)
+}
+
+func waitUsernameGifts(bot *api.Bot, message *api.Message) {
+	tr := i18n.ForUser(message.From.ID)
+	username := strings.TrimSpace(message.Text)
+	session, ok := fsm.UserFSM.Get(message.From.ID)
+	if !ok {
+		return
+	}
+
+	utils.DeleteMessage(bot, message)
+	session.State = fsm.StateIdle
+	session.Username = username
+	fsm.UserFSM.Set(message.From.ID, session)
+
+	utils.EditById(
+		bot,
+		int64(session.MessageID),
+		message.Chat.ID,
+		tr.Get("menu.buy_list.gifts.self").Format("username", username, "adamant_balance", fsmUserBalance(message.From.ID)),
+		botpkg.GiftList(tr.Language()),
+	)
+}
+
+func waitGiftMemo(bot *api.Bot, message *api.Message) {
+	tr := i18n.ForUser(message.From.ID)
+	memo := strings.TrimSpace(message.Text)
+	if memo == "" || len([]rune(memo)) > 255 {
+		return
+	}
+
+	session, ok := fsm.UserFSM.Get(message.From.ID)
+	if !ok {
+		return
+	}
+
+	username := session.Username
+	if username == "" {
+		return
+	}
+
+	utils.DeleteMessage(bot, message)
+	session.Memo = memo
+	session.State = fsm.StateIdle
+	fsm.UserFSM.Set(message.From.ID, session)
+
+	utils.EditById(
+		bot,
+		int64(session.MessageID),
+		message.Chat.ID,
+		tr.Payment("source").Format("adamant_balance", fsmUserBalance(message.From.ID)),
+		botpkg.PaymentSource(tr.Language(), utils.GenerateOrderData("gifts", session.GiftID, username)),
 	)
 	fsm.UserFSM.Clear(message.From.ID)
 }
@@ -77,5 +160,5 @@ func fsmUserBalance(userID int64) string {
 		return "0"
 	}
 
-	return string(balance)
+	return strconv.FormatInt(balance, 10)
 }

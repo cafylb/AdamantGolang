@@ -18,6 +18,8 @@
         "username_error": "<b>Please check if the username is correct <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nThis username did not pass the basic check, make sure it is correct and try again"
       },
       "gifts": {
+        "username": "<b>Please enter the username of the account where the gift will be sent <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>вќ—пёЏ</tg-emoji>",
+        "comment_input": "<b>Send the comment for the gift <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\nYou can send up to 255 characters.",
         "self": "Select the gift you want to buy <tg-emoji emoji-id='6037175527846975726'>🎁</tg-emoji>"
       }
     },
@@ -115,6 +117,7 @@
       "stars": "Stars",
       "premium": "Premium Subscription",
       "gifts": "Buy Gifts",
+      "another": "Change Sender",
       "another_star": "Change Sender"
     }
   },

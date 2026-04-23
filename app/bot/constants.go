@@ -1,14 +1,14 @@
 package bot
 
 const (
-	fifty      = 75
-	hundred    = 150
-	fifteen    = 25
-	twentyfive = 40
+	fifty = 0.89
+	hundred = 1.75
+	fifteen = 0.45
+	twentyfive = 0.70
 )
 
 type gift struct {
-	Price   int64
+	Price   float64
 	Icon    string
 	EmojiID int64
 	GiftID  int64

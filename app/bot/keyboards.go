@@ -6,6 +6,7 @@ import (
 
 	config "adamant/app/bot/config"
 	i18n "adamant/app/bot/core/i18n"
+	"adamant/app/bot/utils"
 
 	api "github.com/mymmrac/telego"
 	tu "github.com/mymmrac/telego/telegoutil"
@@ -30,7 +31,7 @@ func MainPanel(lang string) *api.InlineKeyboardMarkup {
 func AnotherPurchase(lang string, method string) *api.InlineKeyboardMarkup {
 	return tu.InlineKeyboard(
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, fmt.Sprintf("button.buy_list.another_%s", method))).WithCallbackData(fmt.Sprintf("buy_%d_friend", method)).WithIconCustomEmojiID("6035084557378654059").WithStyle("primary"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another")).WithCallbackData(fmt.Sprintf("buy_%s_friend", method)).WithIconCustomEmojiID("6035084557378654059").WithStyle("primary"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5960671702059848143"),
@@ -123,14 +124,13 @@ func PayCryptomus(lang, url string) *api.InlineKeyboardMarkup {
 	)
 }
 
-func UzdUsd(lang string, amount int, username string) *api.InlineKeyboardMarkup {
-	data := fmt.Sprintf("%d_%s", amount, username)
+func UzdUsd(lang string, data string) *api.InlineKeyboardMarkup {
 	return tu.InlineKeyboard(
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.main.support")).WithURL(config.Cfg.Support).WithIconCustomEmojiID("5431376038628171216"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData(fmt.Sprintf("%s_back", data)).WithIconCustomEmojiID("5352759161945867747"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData(fmt.Sprintf("payment_%s", data)).WithIconCustomEmojiID("5352759161945867747"),
 		),
 	)
 }
@@ -143,24 +143,39 @@ func Copy(lang, text string) *api.InlineKeyboardMarkup {
 	)
 }
 
-func PaymentSource(lang string, amount int, username string) *api.InlineKeyboardMarkup {
-	priceCoins := float32(amount) * 1.5
-	usdPrice := float32(amount) * 1.53
-	data := fmt.Sprintf("%d_%s", amount, username)
+func PaymentSource(lang string, data string) *api.InlineKeyboardMarkup {
+	product, value, _, ok := utils.DivideOrderData(data)
+	var usdPrice float64
+	var priceCoins int
+	if !ok {
+		product = ""
+	}
+
+	switch product {
+	case "stars":
+		usdPrice, priceCoins = utils.StarsToUsdCoin(value)
+	case "premium":
+		usdPrice, priceCoins = utils.PremiumToUsdCoin(strconv.Itoa(value))
+	case "gifts":
+		if value >= 0 && value < len(Gifts) {
+			usdPrice = Gifts[value].Price
+			priceCoins = int(usdPrice * 100)
+		}
+	}
 
 	return tu.InlineKeyboard(
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("TON (%f$)", usdPrice)).WithCallbackData(fmt.Sprintf("%s_ton_P", data)).WithIconCustomEmojiID("5769406891289481208"),
+			tu.InlineKeyboardButton(fmt.Sprintf("TON (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_ton_%s", data)).WithIconCustomEmojiID("5769406891289481208"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton("USD").WithCallbackData(fmt.Sprintf("%s_usd_P", data)).WithIconCustomEmojiID("5927169041595634481"),
-			tu.InlineKeyboardButton("UZS").WithCallbackData(fmt.Sprintf("%s_uzs_P", data)).WithIconCustomEmojiID("5927169041595634481"),
+			tu.InlineKeyboardButton("USD").WithCallbackData(fmt.Sprintf("pay_usd_%s", data)).WithIconCustomEmojiID("5927169041595634481"),
+			tu.InlineKeyboardButton("UZS").WithCallbackData(fmt.Sprintf("pay_uzs_%s", data)).WithIconCustomEmojiID("5927169041595634481"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("Adamant Balance (%s coins)", priceCoins)).WithCallbackData(fmt.Sprintf("%s_adamant_P", data)).WithIconCustomEmojiID("5769126056262898415"),
+			tu.InlineKeyboardButton(fmt.Sprintf("Adamant Balance (%d coins)", priceCoins)).WithCallbackData(fmt.Sprintf("pay_adamant_%s", data)).WithIconCustomEmojiID("5769126056262898415"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%s$)", usdPrice)).WithCallbackData(fmt.Sprintf("%s_cryptomus_P", data)).WithIconCustomEmojiID("5345837435601305335"),
+			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_cryptomus_%s", data)).WithIconCustomEmojiID("5345837435601305335"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5960671702059848143"),
@@ -182,15 +197,15 @@ func GiftList(lang string, page ...int) *api.InlineKeyboardMarkup {
 	var rows [][]api.InlineKeyboardButton
 	for i := s; i < s+8 && i < len(Gifts)-1; i += 2 {
 		rows = append(rows, tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("| %d coins", Gifts[i].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i].EmojiID, 10)),
-			tu.InlineKeyboardButton(fmt.Sprintf("| %d coins", Gifts[i+1].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i+1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i+1].EmojiID, 10)),
+			tu.InlineKeyboardButton(fmt.Sprintf("| %.2f coins", Gifts[i].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i].EmojiID, 10)),
+			tu.InlineKeyboardButton(fmt.Sprintf("| %.2f coins", Gifts[i+1].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i+1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i+1].EmojiID, 10)),
 		))
 	}
 
 	if curPage == totalPages {
 		if len(Gifts)%2 == 1 {
 			rows = append(rows, tu.InlineKeyboardRow(
-				tu.InlineKeyboardButton(fmt.Sprintf("| %d coins", Gifts[len(Gifts)-1].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", len(Gifts)-1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[len(Gifts)-1].EmojiID, 10)),
+				tu.InlineKeyboardButton(fmt.Sprintf("| %.2f coins", Gifts[len(Gifts)-1].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", len(Gifts)-1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[len(Gifts)-1].EmojiID, 10)),
 				tu.InlineKeyboardButton("\u200B").WithCallbackData("ignore").WithIconCustomEmojiID(""),
 			))
 		}
@@ -220,7 +235,7 @@ func GiftList(lang string, page ...int) *api.InlineKeyboardMarkup {
 	}
 
 	keyboard = append(keyboard, tu.InlineKeyboardRow(
-		tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another_star")).WithCallbackData("buy_gifts_friend").WithIconCustomEmojiID("6035084557378654059").WithStyle("primary"),
+		tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another")).WithCallbackData("buy_gifts_friend").WithIconCustomEmojiID("6035084557378654059").WithStyle("primary"),
 	))
 	keyboard = append(keyboard, tu.InlineKeyboardRow(
 		tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250").WithStyle("danger"),
@@ -243,10 +258,10 @@ func GiftSelected(lang string, giftID int, anonim bool) *api.InlineKeyboardMarku
 			tu.InlineKeyboardButton(i18n.GetFor(lang, anonimS)).WithCallbackData(data).WithIconCustomEmojiID("5303360582706015886"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.gifts.comment.self")).WithCallbackData("ignore").WithIconCustomEmojiID("5883997877172179131"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.gifts.comment.self")).WithCallbackData(fmt.Sprintf("gift_comment_%d_%t", giftID, anonim)).WithIconCustomEmojiID("5883997877172179131"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.gifts.comment.without")).WithCallbackData("ignore").WithIconCustomEmojiID("5967355281057779430"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.gifts.comment.without")).WithCallbackData(fmt.Sprintf("gift_without_comment_%d_%t", giftID, anonim)).WithIconCustomEmojiID("5967355281057779430"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("gifts_purchase").WithIconCustomEmojiID("5348414733806484250"),
@@ -266,7 +281,7 @@ func Premium(lang string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.premium.three")).WithCallbackData("premium_purchase_3").WithIconCustomEmojiID("5388849303982716989"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another_star")).WithCallbackData("buy_premium_friend").WithIconCustomEmojiID("6035084557378654059"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another")).WithCallbackData("buy_premium_friend").WithIconCustomEmojiID("6035084557378654059"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("60671702059848143"),
