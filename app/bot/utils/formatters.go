@@ -44,11 +44,20 @@ func DivideOrderData(data string) (string, int, string, bool) {
 }
 
 func DividePaymentData(data string) (string, int, string, string, string) {
-	dataP := strings.Split(data, "-")
+	data = strings.TrimSpace(data)
+	if data == "" {
+		return "", -1, "", "", ""
+	}
+
+	dataP := strings.SplitN(data, "-", 5)
+	if len(dataP) != 5 {
+		return "", -1, "", "", ""
+	}
+
 	amount, err := strconv.Atoi(dataP[1])
 	if err != nil {
 		return "", -1, "", "", ""
-	}	
+	}
 	return dataP[0], amount, dataP[2], dataP[3], dataP[4]
 }
 

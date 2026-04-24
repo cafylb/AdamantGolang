@@ -44,7 +44,7 @@ type tonAPITransaction struct {
 }
 
 type tonAPIInMessage struct {
-	Value       string                `json:"value"`
+	Value       tonAPINumericString   `json:"value"`
 	Comment     string                `json:"comment"`
 	DecodedBody *tonAPIDecodedMessage `json:"decoded_body"`
 }
@@ -223,7 +223,12 @@ func (client *TONClient) completePurchase(ctx context.Context, purchase *purchas
 }
 
 func parsePaymentData(data string) (paymentData, error) {
-	product, amount, username, amountTON, system := utils.DividePaymentData(strings.TrimSpace(data))
+	data = strings.TrimSpace(data)
+	if data == "" || strings.Count(data, "-") < 4 {
+		return paymentData{}, ErrTestTONInvalidMemo
+	}
+
+	product, amount, username, amountTON, system := utils.DividePaymentData(data)
 	if product == "" || amount <= 0 || username == "" || amountTON == "" || system == "" {
 		return paymentData{}, ErrTestTONInvalidMemo
 	}
@@ -263,4 +268,26 @@ func extractMemo(message *tonAPIInMessage) string {
 		return strings.TrimSpace(message.DecodedBody.Text)
 	}
 	return ""
+}
+
+type tonAPINumericString string
+
+func (value *tonAPINumericString) UnmarshalJSON(data []byte) error {
+	data = []byte(strings.TrimSpace(string(data)))
+	if len(data) == 0 || string(data) == "null" {
+		*value = ""
+		return nil
+	}
+
+	if data[0] == '"' {
+		var str string
+		if err := json.Unmarshal(data, &str); err != nil {
+			return err
+		}
+		*value = tonAPINumericString(strings.TrimSpace(str))
+		return nil
+	}
+
+	*value = tonAPINumericString(string(data))
+	return nil
 }

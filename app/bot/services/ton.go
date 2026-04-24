@@ -60,7 +60,7 @@ type tonAPITransaction struct {
 }
 
 type tonAPIInMessage struct {
-	Value       string                `json:"value"`
+	Value       tonAPINumericString   `json:"value"`
 	Comment     string                `json:"comment"`
 	DecodedBody *tonAPIDecodedMessage `json:"decoded_body"`
 }
@@ -268,38 +268,63 @@ func (client *TONClient) PaymentMonitor(ctx context.Context, bot *api.Bot) {
 }
 
 func (client *TONClient) handleTransaction(ctx context.Context, tx tonAPITransaction, bot *api.Bot) (bool, error) {
+	txHash := strings.TrimSpace(tx.Hash)
 	inMsg := tx.InMsg
 	if inMsg == nil {
+		log.Printf("TON skip %s: incoming message is empty", shortHash(txHash))
 		return false, nil
 	}
 
-	payment, err := parsePaymentData(extractTONMemo(inMsg))
+	memo := extractTONMemo(inMsg)
+	payment, err := parsePaymentData(memo)
 	if err != nil {
+		log.Printf("TON skip %s: invalid memo %q", shortHash(txHash), memo)
 		return false, nil
 	}
 	if payment.System != "ton" {
+		log.Printf("TON skip %s: memo system is %q, expected ton", shortHash(txHash), payment.System)
 		return false, nil
 	}
 
-	valueNano, err := strconv.ParseInt(strings.TrimSpace(inMsg.Value), 10, 64)
+	valueNano, err := inMsg.Value.Int64()
 	if err != nil || valueNano <= 0 {
+		log.Printf("TON skip %s: invalid incoming value %q", shortHash(txHash), inMsg.Value.String())
 		return false, fmt.Errorf("%w: invalid incoming value", ErrTONClient)
 	}
+
+	log.Printf(
+		"TON accept %s: memo=%q | product=%s | user=%s | expected=%.9f TON | received=%.9f TON",
+		shortHash(txHash),
+		memo,
+		payment.Product,
+		payment.Username,
+		payment.AmountTON,
+		float64(valueNano)/1e9,
+	)
 
 	purchase, err := client.getPendingPurchase(ctx, payment.String())
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
+			log.Printf("TON skip %s: purchase not found for memo %q", shortHash(txHash), payment.String())
 			return false, nil
 		}
 		return true, err
 	}
 
 	if time.Since(purchase.CreatedAt.UTC()) > tonPaymentWindow {
+		log.Printf("TON skip %s: purchase expired | created_at=%s | memo=%q", shortHash(txHash), purchase.CreatedAt.UTC().Format(time.RFC3339), purchase.Data)
 		return false, nil
 	}
 
 	receivedTON := float64(valueNano) / 1e9
 	if receivedTON < payment.AmountTON-tonUnderpaymentDeltaTON {
+		log.Printf(
+			"TON skip %s: underpaid | received=%.9f TON | expected=%.9f TON | memo=%q",
+			shortHash(txHash),
+			receivedTON,
+			payment.AmountTON,
+			payment.String(),
+		)
 		return false, fmt.Errorf(
 			"%w: got %.9f TON, expected %.9f TON",
 			ErrTONUnderpaid,
@@ -310,6 +335,7 @@ func (client *TONClient) handleTransaction(ctx context.Context, tx tonAPITransac
 
 	deliveryRef, err := client.fulfillPurchase(ctx, payment)
 	if err != nil {
+		log.Printf("TON accept %s: payment matched but fulfillment failed for memo %q: %v", shortHash(txHash), payment.String(), err)
 		return true, err
 	}
 
@@ -319,7 +345,8 @@ func (client *TONClient) handleTransaction(ctx context.Context, tx tonAPITransac
 	}
 
 	log.Printf(
-		"TON purchase completed: %s | %.9f TON | %s",
+		"TON complete %s: %s | %.9f TON | %s",
+		shortHash(txHash),
 		purchase.Data,
 		receivedTON,
 		deliveryRef,
@@ -409,7 +436,12 @@ func (client *TONClient) completePurchase(ctx context.Context, purchase *tonPurc
 }
 
 func parsePaymentData(data string) (paymentData, error) {
-	product, amount, username, amountTON, system := utils.DividePaymentData(strings.TrimSpace(data))
+	data = strings.TrimSpace(data)
+	if data == "" || strings.Count(data, "-") < 4 {
+		return paymentData{}, ErrTONInvalidMemo
+	}
+
+	product, amount, username, amountTON, system := utils.DividePaymentData(data)
 	if product == "" || amount <= 0 || username == "" || amountTON == "" || system == "" {
 		return paymentData{}, ErrTONInvalidMemo
 	}
@@ -493,6 +525,41 @@ func shortHash(txHash string) string {
 		return txHash
 	}
 	return txHash[:16] + "..."
+}
+
+type tonAPINumericString string
+
+func (value *tonAPINumericString) UnmarshalJSON(data []byte) error {
+	data = []byte(strings.TrimSpace(string(data)))
+	if len(data) == 0 || string(data) == "null" {
+		*value = ""
+		return nil
+	}
+
+	if data[0] == '"' {
+		var str string
+		if err := json.Unmarshal(data, &str); err != nil {
+			return err
+		}
+		*value = tonAPINumericString(strings.TrimSpace(str))
+		return nil
+	}
+
+	*value = tonAPINumericString(string(data))
+	return nil
+}
+
+func (value tonAPINumericString) String() string {
+	return strings.TrimSpace(string(value))
+}
+
+func (value tonAPINumericString) Int64() (int64, error) {
+	raw := value.String()
+	if raw == "" {
+		return 0, fmt.Errorf("empty numeric value")
+	}
+
+	return strconv.ParseInt(raw, 10, 64)
 }
 
 var TONService *TONClient
