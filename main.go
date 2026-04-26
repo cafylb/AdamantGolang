@@ -28,7 +28,7 @@ func main() {
 
 	i18n.MustInit()
 
-	bot, err := api.NewBot(config.Cfg.Token, api.WithDefaultDebugLogger())
+	bot, err := api.NewBot(config.Cfg.Token)
 	if err != nil {
 		log.Fatal(err)
 	}

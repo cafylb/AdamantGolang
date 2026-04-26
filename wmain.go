@@ -31,7 +31,7 @@ func main() {
 
 	i18n.MustInit()
 
-	bot, err := telego.NewBot(config.Cfg.Token, telego.WithDefaultDebugLogger())
+	bot, err := telego.NewBot(config.Cfg.Token)
 	if err != nil {
 		log.Fatal(err)
 	}
