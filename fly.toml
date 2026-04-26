@@ -1,5 +1,7 @@
-# fly.toml app configuration file generated for adamantgolang
+# fly.toml app configuration file generated for adamantgolang on 2026-04-26T07:14:50Z
+#
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = 'adamantgolang'
 primary_region = 'arn'
@@ -10,7 +12,7 @@ primary_region = 'arn'
   PORT = '3400'
 
 [http_service]
-  internal_port = 3400
+  internal_port = 8080
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
