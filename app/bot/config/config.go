@@ -45,9 +45,7 @@ type Config struct {
 }
 
 func Load() *Config {
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal("Failed to load .env: ", err)
-	}
+	_ = godotenv.Load(".env")
 
 	return &Config{
 		Token:               get("TOKEN"),
