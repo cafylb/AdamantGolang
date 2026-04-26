@@ -60,7 +60,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/webhook", handleWebhook(bot))
 	mux.HandleFunc("/api/health", healthHandler)
-	mux.HandleFunc("/api/user/balance", apiUserBalance(db))
+	mux.HandleFunc("/api/user/balance", apiUserBalance())
 
 	server := &http.Server{
 		Addr:         ":3400",
@@ -148,7 +148,7 @@ func apiUserBalance() http.HandlerFunc {
 	}
 }
 
-func apiCreateOrder(db *database.Postgres) http.HandlerFunc {
+func apiCreateOrder() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
 			http.Error(w, "Method not allowed", 405)
@@ -179,7 +179,7 @@ func apiCreateOrder(db *database.Postgres) http.HandlerFunc {
 	}
 }
 
-func apiGetOrder(db *database.Postgres) http.HandlerFunc {
+func apiGetOrder() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "GET" {
 			http.Error(w, "Method not allowed", 405)
