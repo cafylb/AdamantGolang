@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "wmain.go",
+      "use": "@now/go",
+      "config": {
+        "output": "run-app"
+      }
+    }
+  ],
+  "version": 2,
+  "buildCommand": "go build -tags=webhook -ldflags=\"-s -w\" -o run-app ./wmain.go",
+  "outputDirectory": "."
+}
