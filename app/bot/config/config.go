@@ -9,11 +9,12 @@ import (
 )
 
 type Config struct {
-	Token     string
-	Username  string
-	MIN_STARS int32
-	MAX_STARS int32
-	Price     float64
+	Token      string
+	Username   string
+	MIN_STARS  int32
+	MAX_STARS  int32
+	Price      float64
+	WebhookURL string
 
 	DB          string
 	FSM_STORAGE string
@@ -54,6 +55,7 @@ func Load() *Config {
 		MIN_STARS:           getInt32("MIN_STARS"),
 		MAX_STARS:           getInt32("MAX_STARS"),
 		Price:               getFloat64("PRICE"),
+		WebhookURL:          get("WEBHOOK_URL"),
 		DB:                  get("DB"),
 		FSM_STORAGE:         getDefault("FSM_STORAGE", "redis"),
 		REDIS_URL:           getDefault("REDIS_URL", "redis://127.0.0.1:6379/0"),

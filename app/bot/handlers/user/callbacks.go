@@ -230,7 +230,7 @@ func uzsPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, d
 	utils.Edit(bot, callback.Message.Message(), tr.Get("payment.slow.uzs").String(), botpkg.UzdUsd(tr.Language(), data))
 }
 
-func tonPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
+func  tonPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
 	product, amount, username, ok := utils.DivideOrderData(data)
 	if !ok || product != "stars" {
 		utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())

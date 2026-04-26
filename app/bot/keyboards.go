@@ -16,7 +16,7 @@ func MainPanel(lang string) *api.InlineKeyboardMarkup {
 	return tu.InlineKeyboard(
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.main.purchase")).WithCallbackData("purchase").WithIconCustomEmojiID("5904462880941545555"),
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.main.mini_games")).WithURL(config.Cfg.Gifts).WithIconCustomEmojiID("5773677501825945508"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.main.mini_games")).WithCallbackData("nothing").WithIconCustomEmojiID("5773677501825945508"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.main.support")).WithURL(config.Cfg.Support).WithIconCustomEmojiID("5940433880585605708"),
@@ -34,7 +34,7 @@ func AnotherPurchase(lang string, method string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another")).WithCallbackData(fmt.Sprintf("buy_%s_friend", method)).WithIconCustomEmojiID("6035084557378654059").WithStyle("primary"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5960671702059848143"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250").WithStyle("danger"),
 		),
 	)
 }
@@ -45,7 +45,7 @@ func Cancel(lang string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.cancel")).WithCallbackData("nothing").WithIconCustomEmojiID("5271533904380046720").WithStyle("danger"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5960671702059848143"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250"),
 		),
 	)
 }
@@ -72,7 +72,7 @@ func BuyList(lang string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.gifts")).WithCallbackData("gifts_purchase").WithIconCustomEmojiID("6037175527846975726"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("nothing").WithIconCustomEmojiID("5960671702059848143"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("nothing").WithIconCustomEmojiID("5348414733806484250"),
 		),
 	)
 }
@@ -95,7 +95,7 @@ func Language(lang string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.languages.uz")).WithCallbackData("set_language_uz").WithIconCustomEmojiID("5449829434334912605"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("nothing").WithIconCustomEmojiID("5960671702059848143"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("nothing").WithIconCustomEmojiID("5348414733806484250"),
 		),
 	)
 }
@@ -130,7 +130,7 @@ func UzdUsd(lang string, data string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.main.support")).WithURL(config.Cfg.Support).WithIconCustomEmojiID("5431376038628171216"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData(fmt.Sprintf("payment_%s", data)).WithIconCustomEmojiID("5352759161945867747"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData(fmt.Sprintf("payment_%s", data)).WithIconCustomEmojiID("5348414733806484250"),
 		),
 	)
 }
@@ -178,7 +178,7 @@ func PaymentSource(lang string, data string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_cryptomus_%s", data)).WithIconCustomEmojiID("5345837435601305335"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5960671702059848143"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250"),
 		),
 	)
 }
@@ -197,15 +197,15 @@ func GiftList(lang string, page ...int) *api.InlineKeyboardMarkup {
 	var rows [][]api.InlineKeyboardButton
 	for i := s; i < s+8 && i < len(Gifts)-1; i += 2 {
 		rows = append(rows, tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("| %.2f coins", Gifts[i].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i].EmojiID, 10)),
-			tu.InlineKeyboardButton(fmt.Sprintf("| %.2f coins", Gifts[i+1].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i+1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i+1].EmojiID, 10)),
+			tu.InlineKeyboardButton(fmt.Sprintf("| %d coins", int(Gifts[i].Price * 100))).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i].EmojiID, 10)),
+			tu.InlineKeyboardButton(fmt.Sprintf("| %d coins", int(Gifts[i+1].Price * 100))).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", i+1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[i+1].EmojiID, 10)),
 		))
 	}
 
 	if curPage == totalPages {
 		if len(Gifts)%2 == 1 {
 			rows = append(rows, tu.InlineKeyboardRow(
-				tu.InlineKeyboardButton(fmt.Sprintf("| %.2f coins", Gifts[len(Gifts)-1].Price)).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", len(Gifts)-1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[len(Gifts)-1].EmojiID, 10)),
+				tu.InlineKeyboardButton(fmt.Sprintf("| %d coins", int(Gifts[len(Gifts)-1].Price * 100))).WithCallbackData(fmt.Sprintf("gift_purchase_%d_0", len(Gifts)-1)).WithIconCustomEmojiID(strconv.FormatInt(Gifts[len(Gifts)-1].EmojiID, 10)),
 				tu.InlineKeyboardButton("\u200B").WithCallbackData("ignore").WithIconCustomEmojiID(""),
 			))
 		}
@@ -264,7 +264,7 @@ func GiftSelected(lang string, giftID int, anonim bool) *api.InlineKeyboardMarku
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.gifts.comment.without")).WithCallbackData(fmt.Sprintf("gift_without_comment_%d_%t", giftID, anonim)).WithIconCustomEmojiID("5967355281057779430"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("gifts_purchase").WithIconCustomEmojiID("5348414733806484250"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("gifts_purchase").WithIconCustomEmojiID("5348414733806484250").WithStyle("danger"),
 		),
 	)
 }
@@ -281,10 +281,10 @@ func Premium(lang string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.premium.three")).WithCallbackData("premium_purchase_3").WithIconCustomEmojiID("5388849303982716989"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another")).WithCallbackData("buy_premium_friend").WithIconCustomEmojiID("6035084557378654059"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.buy_list.another")).WithCallbackData("buy_premium_friend").WithIconCustomEmojiID("6035084557378654059").WithStyle("primary"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("60671702059848143"),
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250").WithStyle("danger"),
 		),
 	)
 }
