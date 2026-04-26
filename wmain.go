@@ -124,7 +124,7 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"ok": true}`))
 }
 
-func apiUserBalance(db *database.) http.HandlerFunc {
+func apiUserBalance() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "GET" {
 			http.Error(w, "Method not allowed", 405)
