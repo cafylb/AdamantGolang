@@ -1,3 +1,6 @@
+//go:build webhook
+// +build webhook
+
 package main
 
 import (
@@ -137,12 +140,10 @@ func apiUserBalance() http.HandlerFunc {
 			return
 		}
 
-		
-		
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
-			"telegram_id": telegramID,
-			"balance_usd": 0,
+			"telegram_id":   telegramID,
+			"balance_usd":   0,
 			"balance_stars": 0,
 		})
 	}
@@ -156,10 +157,10 @@ func apiCreateOrder() http.HandlerFunc {
 		}
 
 		var req struct {
-			TelegramID  int64   `json:"telegram_id"`
-			Username    string  `json:"username"`
-			Amount      int     `json:"amount"`
-			Method      string  `json:"method"`
+			TelegramID int64  `json:"telegram_id"`
+			Username   string `json:"username"`
+			Amount     int    `json:"amount"`
+			Method     string `json:"method"`
 		}
 
 		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -174,7 +175,7 @@ func apiCreateOrder() http.HandlerFunc {
 		w.WriteHeader(201)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"order_id": "temp_order_id",
-			"status": "pending",
+			"status":   "pending",
 		})
 	}
 }
@@ -198,8 +199,8 @@ func apiGetOrder() http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"order_id": orderID,
-			"status": "pending",
-			"amount": 0,
+			"status":   "pending",
+			"amount":   0,
 		})
 	}
 }

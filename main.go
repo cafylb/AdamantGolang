@@ -1,3 +1,6 @@
+//go:build !webhook
+// +build !webhook
+
 package main
 
 import (
