@@ -211,19 +211,20 @@ func GiftList(lang string, page ...int) *api.InlineKeyboardMarkup {
 		}
 	}
 
-	if curPage == 1 {
+	switch curPage {
+	case 1:
 		keyboard = append(keyboard, rows...)
 		keyboard = append(keyboard, tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(fmt.Sprintf("%d/%d", curPage, totalPages)).WithCallbackData("ignore"),
 			tu.InlineKeyboardButton("\u200B").WithCallbackData(fmt.Sprintf("gifts_purchase_%d", curPage+1)).WithIconCustomEmojiID("5345844853009828446"),
 		))
-	} else if curPage == totalPages {
+	case totalPages:
 		keyboard = append(keyboard, rows...)
 		keyboard = append(keyboard, tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton("\u200B").WithCallbackData(fmt.Sprintf("gifts_purchase_%d", curPage-1)).WithIconCustomEmojiID("5348414733806484250"),
 			tu.InlineKeyboardButton(fmt.Sprintf("%d/%d", curPage, totalPages)).WithCallbackData("ignore"),
 		))
-	} else {
+	default:
 		keyboard = append(keyboard, tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(fmt.Sprintf("%d/%d", curPage, totalPages)).WithCallbackData("ignore"),
 		))

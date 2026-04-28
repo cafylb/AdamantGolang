@@ -8,6 +8,7 @@ import (
 	database "adamant/app/bot/database"
 	repository "adamant/app/bot/database/repository"
 	"adamant/app/bot/utils"
+	services "adamant/app/bot/services"
 	"context"
 	"strconv"
 	"strings"
@@ -37,6 +38,12 @@ func waitUsernameStars(bot *api.Bot, message *api.Message) {
 	if !ok {
 		return
 	}
+	_, err := services.FragmentService.CheckUsername(context.Background(), username)
+	if err != nil {
+		utils.DeleteMessage(bot, message)
+		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("error.username").String(), botpkg.Cancel(tr.Language()))
+		return
+	}
 
 	utils.DeleteMessage(bot, message)
 	utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("menu.buy_list.stars.self").Format("MIN_STARS", config.Cfg.MIN_STARS, "MAX_STARS", config.Cfg.MAX_STARS, "username", username), botpkg.AnotherPurchase(tr.Language(), "stars"))
@@ -63,14 +70,8 @@ func waitAmount(bot *api.Bot, message *api.Message) {
 		return
 	}
 
-	utils.DeleteMessage(bot, message)
-	utils.EditById(
-		bot,
-		int64(session.MessageID),
-		message.Chat.ID,
-		tr.Payment("source").Format("adamant_balance", fsmUserBalance(message.From.ID)),
-		botpkg.PaymentSource(tr.Language(), utils.GenerateOrderData("stars", amount, username)),
-	)
+	go utils.DeleteMessage(bot, message)
+	utils.EditById(bot, int64(session.MessageID), message.Chat.ID, tr.Payment("source").Format("adamant_balance", fsmUserBalance(message.From.ID)), botpkg.PaymentSource(tr.Language(), utils.GenerateOrderData("stars", amount, username)))
 	fsm.UserFSM.Clear(message.From.ID)
 }
 
@@ -79,21 +80,25 @@ func waitUsernamePremium(bot *api.Bot, message *api.Message) {
 	username := strings.TrimSpace(message.Text)
 	session, ok := fsm.UserFSM.Get(message.From.ID)
 	if !ok {
+		return	
+	}
+
+	isPremium, user, err := services.FragmentService.CheckPremium(context.Background(), username, 3)
+	if user == "" || err != nil {
+		go utils.DeleteMessage(bot, message)
+		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("error.username").String(), botpkg.Cancel(tr.Language()))
+		return
+	} else if isPremium {
+		go utils.DeleteMessage(bot, message)
+		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("menu.buy_list.premium.already_has").String(), botpkg.Cancel(tr.Language()))
 		return
 	}
 
+	go utils.EditById(bot, int64(session.MessageID), message.Chat.ID, tr.Get("menu.buy_list.premium.self").Format("username", username),botpkg.Premium(tr.Language()))
 	utils.DeleteMessage(bot, message)
 	session.State = fsm.StateIdle
 	session.Username = username
 	fsm.UserFSM.Set(message.From.ID, session)
-
-	utils.EditById(
-		bot,
-		int64(session.MessageID),
-		message.Chat.ID,
-		tr.Get("menu.buy_list.premium.self").Format("username", username),
-		botpkg.Premium(tr.Language()),
-	)
 }
 
 func waitUsernameGifts(bot *api.Bot, message *api.Message) {
@@ -104,18 +109,18 @@ func waitUsernameGifts(bot *api.Bot, message *api.Message) {
 		return
 	}
 
-	utils.DeleteMessage(bot, message)
+	_, err := services.FragmentService.CheckUsername(context.Background(), username)
+	if err != nil {
+		utils.DeleteMessage(bot, message)
+		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("error.username").String(), botpkg.Cancel(tr.Language()))
+		return
+	}
+
+	go utils.DeleteMessage(bot, message)
+	utils.EditById(bot, int64(session.MessageID), message.Chat.ID, tr.Get("menu.buy_list.gifts.self").Format("username", username, "adamant_balance", fsmUserBalance(message.From.ID)), botpkg.GiftList(tr.Language()))
 	session.State = fsm.StateIdle
 	session.Username = username
 	fsm.UserFSM.Set(message.From.ID, session)
-
-	utils.EditById(
-		bot,
-		int64(session.MessageID),
-		message.Chat.ID,
-		tr.Get("menu.buy_list.gifts.self").Format("username", username, "adamant_balance", fsmUserBalance(message.From.ID)),
-		botpkg.GiftList(tr.Language()),
-	)
 }
 
 func waitGiftMemo(bot *api.Bot, message *api.Message) {

@@ -47,7 +47,7 @@ func main() {
 			log.Printf("background shutdown error: %v", err)
 		}
 	}()
-
+	
 	updates, err := bot.UpdatesViaLongPolling(ctx, nil)
 	if err != nil {
 		log.Fatal(err)

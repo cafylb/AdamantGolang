@@ -26,7 +26,7 @@ import (
 const (
 	tonTransactionsURL      = "https://tonapi.io/v2/blockchain/accounts/%s/transactions?limit=20&include_msg=true"
 	tonSystem               = "TON <tg-emoji emoji-id='5406976471153545018'>&#9786;</tg-emoji>"
-	tonRequestTimeout       = 8 * time.Second
+	tonRequestTimeout       = 30 * time.Second
 	tonPollInterval         = 10 * time.Second
 	tonPaymentWindow        = 30 * time.Minute
 	tonUnderpaymentDeltaTON = 0.0001
@@ -171,7 +171,11 @@ func (client *TONClient) CheckTransactions(ctx context.Context) []tonAPITransact
 		return nil
 	}
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf(tonTransactionsURL, bank), nil)
+	// Создаём новый контекст с таймаутом, независимый от родительского
+	reqCtx, cancel := context.WithTimeout(context.Background(), tonRequestTimeout)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(reqCtx, http.MethodGet, fmt.Sprintf(tonTransactionsURL, bank), nil)
 	if err != nil {
 		log.Printf("failed to build TonAPI request: %v", err)
 		return nil

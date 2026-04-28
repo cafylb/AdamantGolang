@@ -44,6 +44,11 @@ func (r *Runtime) Start(ctx context.Context, db *pgxpool.Pool, bot *api.Bot) err
 			return err
 		}
 	}
+	if services.FragmentService == nil {
+		if err := services.InitFragment(); err != nil {
+			return err
+		}
+	}
 
 	runCtx, cancel := context.WithCancel(context.Background())
 	done := make(chan struct{})
@@ -92,6 +97,10 @@ func (r *Runtime) Stop() error {
 	}
 	if services.GiftService != nil {
 		_ = services.GiftService.Stop()
+	}
+	if services.FragmentService != nil {
+		_ = services.FragmentService.Close()
+		services.FragmentService = nil
 	}
 
 	return nil

@@ -323,6 +323,41 @@ func (client *Fragment) CheckUsername(ctx context.Context, username string) (str
 	return anyToString(found["recipient"]), nil
 }
 
+func (client *Fragment) CheckPremium(ctx context.Context, username string, months int) (bool, string, error) {
+	if client == nil {
+		return false, "", fmt.Errorf("%w: fragment client not initialized", ErrFragmentClient)
+	}
+
+	payload, err := client.postFragment(ctx, map[string]string{
+		"query":  username,
+		"months": strconv.Itoa(months),
+		"method": "searchPremiumGiftRecipient",
+	})
+	if err != nil {
+		return false, "", err
+	}
+
+	// Проверяем error до всего остального
+	if errText := anyToString(payload["error"]); errText != "" {
+		if strings.Contains(errText, "already subscribed") {
+			return true, "", nil
+		}
+		return false, "", fmt.Errorf("%w: %s", ErrFragmentClient, errText)
+	}
+
+	found, _ := payload["found"].(map[string]any)
+	if found == nil {
+		return false, "", nil
+	}
+
+	recipient := anyToString(found["recipient"])
+	if recipient == "" {
+		recipient = anyToString(found["username"])
+	}
+
+	return false, recipient, nil
+}
+
 func (client *Fragment) RefreshHash(ctx context.Context) error {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, fragmentHomeURL, nil)
 	if err != nil {
