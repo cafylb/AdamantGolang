@@ -64,6 +64,14 @@ func main() {
 	mux.HandleFunc("/webhook", handleWebhook(bot))
 	mux.HandleFunc("/api/health", healthHandler)
 	mux.HandleFunc("/api/user/balance", apiUserBalance())
+	mux.HandleFunc("/api/orders", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "POST" {
+			apiCreateOrder()(w, r)
+		} else {
+			http.Error(w, "Method not allowed", 405)
+		}
+	})
+	mux.HandleFunc("/api/orders/", apiGetOrder())
 
 	server := &http.Server{
 		Addr:         ":3400",

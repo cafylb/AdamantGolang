@@ -1,82 +1,84 @@
 {
   "menu": {
-    "start": "<b>Welcome to Adamant Stars <tg-emoji emoji-id='5920332557466997677'>🏪</tg-emoji></b>\n\nThis bot was created to buy Telegram Stars without KYC verification at the lowest prices.\nBy using the bot, you confirm that you have read and agree to:\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> <a href='https://telegra.ph/Polzovatelskoe-soglashenie---StarBankuz-11-21'>User Agreement</a>\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> <a href='https://telegra.ph/Politika-konfidencialnosti---StarBankuz-11-21'>Privacy Policy</a>",
+    "start": "<b>Welcome to Adamant Stars <tg-emoji emoji-id='5920332557466997677'>🏪</tg-emoji></b>\n\nThis bot is designed for purchasing Telegram Stars without KYC verification at the lowest prices.\nBy using this bot, you confirm that you have read and agree to:\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> <a href='https://telegra.ph/Polzovatelskoe-soglashenie---StarBankuz-11-21'>Terms of Service</a>\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> <a href='https://telegra.ph/Politika-konfidencialnosti---StarBankuz-11-21'>Privacy Policy</a>",
     "buy_list": {
-      "self": "<b>Select the product you want to buy <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji></b>",
+      "self": "<b>Select the product you want to buy <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji></b>",
       "stars": {
-        "self": "<b>Enter the required amount of stars <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: <code>{MIN_STARS}</code>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maximum: <code>{MAX_STARS}</code>\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Sending to account: @{username}",
-        "amount_error": "<b>Please send a real number of stars you want to buy <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: {MIN_STARS}\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maximum: {MAX_STARS}\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Sending to account: @{username}",
-        "username_self_error": "<b>Your account does not have a username <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nPlease set one, otherwise we cannot send the product without it",
-        "username_error": "<b>Please check if the username is correct <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nThis username did not pass the basic check, make sure it is correct and try again",
-        "username": "<b>Please enter the username of the account where stars will be sent <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
-        "correct_form": "<b>Please use the format:</b> <code>/stars username amount</code>\nExample: <code>/stars durov 100</code>"
+        "self": "<b>Enter the number of stars you need <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: <code>{MIN_STARS}</code>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maximum: <code>{MAX_STARS}</code>\n\n<tg-emoji emoji-id='5771887475421090729'>👤</tg-emoji> Sending to account: @{username}",
+        "amount_error": "<b>Please send a valid number of stars you want to buy <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: {MIN_STARS}\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maximum: {MAX_STARS}\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Sending to account: @{username}",
+        "username_self_error": "<b>Your account does not have a username <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nPlease set one, otherwise we will not be able to send you the product without it",
+        "username_error": "<b>Please verify that the username is correct <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nThis username did not pass the basic check. Make sure it is correct and try again",
+        "username": "<b>Please enter the username of the account to which the stars will be sent <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "correct_form": "<b>Please use the format:</b> <code>/stars username amount</code>\nFor example: <code>/stars durov 100</code>"
       },
       "premium": {
-        "self": "<b>Select the Premium subscription you want <tg-emoji emoji-id='5886685105065300941'>⭐️</tg-emoji></b>\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Sending to account: @{username}",
-        "username": "<b>Please enter the username of the account where the Premium subscription will be sent <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
-        "username_self_error": "<b>Your account does not have a username <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nPlease set one, otherwise we cannot send the product without it",
-        "username_error": "<b>Please check if the username is correct <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nThis username did not pass the basic check, make sure it is correct and try again"
+        "self": "<b>Select the Telegram Premium subscription you need <tg-emoji emoji-id='5879905000972358125'>👥</tg-emoji></b>\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Sending to account: @{username}",
+        "username": "<b>Please enter the username of the account to which the Premium subscription will be sent <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "username_self_error": "<b>Your account does not have a username <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nPlease set one, otherwise we will not be able to send you the product without it",
+        "username_error": "<b>Please verify that the username is correct <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nThis username did not pass the basic check. Make sure it is correct and try again",
+        "already_has": "<b>Please verify that the username is correct <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nThe username is correct, but this account already has a Telegram Premium subscription. Please try again with a different account"
       },
       "gifts": {
-        "username": "<b>Please enter the username of the account where the gift will be sent <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>вќ—пёЏ</tg-emoji>",
-        "comment_input": "<b>Send the comment for the gift <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\nYou can send up to 255 characters.",
-        "self": "Select the gift you want to buy <tg-emoji emoji-id='6037175527846975726'>🎁</tg-emoji>"
+        "comment_input": "<b>Send a comment for the gift <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nYou can send up to 255 characters.",
+        "self": "Select the gift you want to buy <tg-emoji emoji-id='6037175527846975726'>🎁</tg-emoji>\n\n<tg-emoji emoji-id='5771887475421090729'>👤</tg-emoji> Sending to account: @{username}\n\n<tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance}",
+        "username": "<b>Please enter the username of the account to which the gift will be sent <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nMake sure the username is real <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "selected": "<b>Would you like to add a comment to the gift? <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\n<tg-emoji emoji-id='5883997877172179131'>🖋</tg-emoji> You can write <b>any comment</b> to the gift <b>up to 255 characters, it will be sent along with the gift</b>\n\n<b>You selected the gift: <tg-emoji emoji-id={emojiID}>{emojiIcon}</tg-emoji></b>"
       }
     },
-    "support": "You can contact support using the link below <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>",
-    "language": "Select one of the languages below <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>",
-    "profile": "<b><tg-emoji emoji-id='5778145208411624388'>👤</tg-emoji> User Information {username}</b>\n\n<tg-emoji emoji-id='5927118708873892465'>✈️</tg-emoji> Telegram ID: <code>{tg_id}</code>\n<tg-emoji emoji-id='6028338546736107668'>⭐️</tg-emoji> Stars purchased: {stars_spend}\n<tg-emoji emoji-id='5836907383292436018'>💎</tg-emoji> Rank: {value}\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> Ban status: {is_banned}\n\n<b><tg-emoji emoji-id='5319073733443363010'>💎</tg-emoji> Adamant Balance: {adamant_balance} coins</b>",
+    "support": "You can contact support via the link below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>",
+    "language": "Select one of the languages below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>",
+    "profile": "<b><tg-emoji emoji-id='5778145208411624388'>👤</tg-emoji> User information for {username}</b>\n\n<tg-emoji emoji-id='5927118708873892465'>✈️</tg-emoji> Telegram ID: <code>{tg_id}</code>\n<tg-emoji emoji-id='6028338546736107668'>⭐️</tg-emoji> Stars purchased: {stars_spend}\n<tg-emoji emoji-id='5836907383292436018'>💎</tg-emoji> Rank: {value}\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> Ban status: {is_banned}\n\n<b><tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance} coins</b>",
     "id": "<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Your personal Telegram ID: <code>{tg_id}</code>",
     "admin": {
-      "self": "Dear Administrator, which option do you want to choose? <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
-      "false": "You do not have enough permissions to use this command <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
-      "true": "Hello dear Administrator, what would you like to do?",
+      "self": "Dear administrator, which option would you like to choose? <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
+      "false": "You do not have sufficient permissions to use this command <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
+      "true": "Hello dear administrator, what would you like to do?",
       "admins_list": {
-        "self": "<b>Current Administrators List <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji></b>\n\n{admins_list}"
+        "self": "<b>List of current administrators <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji></b>\n\n{admins_list}"
       },
-      "user_info": "<b>Information about user @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji></b>\n\nTelegram ID: <code>{tg_id}</code> <tg-emoji emoji-id='5422683699130933153'>🪪</tg-emoji>\nStars purchased: {stars_spend} <tg-emoji emoji-id='5469741319330996757'>💫</tg-emoji>\nRank: {value}\nBan status: {is_banned}\n\n<b><tg-emoji emoji-id='5312209602610237270'>💎</tg-emoji> Adamant Balance: {adamant_balance} coins</b>",
-      "success_user_ban": "User {tg_id} successfully {banned}",
+      "user_info": "<b>Information about user @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji></b>\n\nTelegram ID: <code>{tg_id}</code> <tg-emoji emoji-id='5422683699130933153'>🪪</tg-emoji>\nStars purchased: {stars_spend} <tg-emoji emoji-id='5469741319330996757'>💫</tg-emoji>\nRank: {value}\nBan status: {is_banned}\n\n<b><tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance} coins</b>",
+      "success_user_ban": "User {tg_id} has been successfully {banned}",
       "status": {
         "admin": "Administrator",
         "user": "User",
         "banned": "Banned",
-        "free": "Free",
+        "free": "Active",
         "ban_action": "Banned",
         "unban_action": "Unbanned"
       },
-      "logs": "Above is the file with all current logs <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
+      "logs": "The file with all current logs is above <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
       "database": "<b>Current database:</b>\n<code>{db_url}</code>",
-      "clear_logs": "<b>All logs successfully cleared <tg-emoji emoji-id='5445267414562389170'>🗑</tg-emoji></b>\nAbove is the file with all old logs <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
+      "clear_logs": "<b>All logs have been successfully cleared <tg-emoji emoji-id='5445267414562389170'>🗑</tg-emoji></b>\nThe file with all old logs is above <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
       "staff": {
-        "self": "Send the Telegram ID of the user whose info you want to see <tg-emoji emoji-id='5431736674147114227'>🗂</tg-emoji>",
-        "id_error": "User with this ID not found in database <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "self": "Send the Telegram ID of the user whose information you want to view <tg-emoji emoji-id='5431736674147114227'>🗂</tg-emoji>",
+        "id_error": "A user with this ID was not found in the database <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
         "hire": {
-          "success": "User <a href='tg://user?id={tg_id}'>{tg_id}</a> successfully appointed as administrator <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
+          "success": "User <a href='tg://user?id={tg_id}'>{tg_id}</a> has been successfully appointed as administrator <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
           "wait_id": "Send the Telegram ID of the user you want to add as administrator <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
         },
         "fire": {
-          "success": "User <a href='tg://user?id={tg_id}'>{tg_id}</a> successfully removed from administrator post <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
-          "wait_id": "Send the Telegram ID of the user you want to remove from administrator post <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
+          "success": "User <a href='tg://user?id={tg_id}'>{tg_id}</a> has been successfully removed from the administrator role <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
+          "wait_id": "Send the Telegram ID of the user you want to remove from the administrator role <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
         }
       },
       "broadcast": {
-        "ask": "Send the message for broadcast <tg-emoji emoji-id='5352896944496728039'>📭</tg-emoji>",
+        "ask": "Send the message for the broadcast <tg-emoji emoji-id='5352896944496728039'>📭</tg-emoji>",
         "confirm": "Are you sure you want to send this message to all users?",
-        "proccess": "Broadcast in progress, please wait...<tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji>",
-        "done": "<b>Broadcast successfully completed <tg-emoji emoji-id='5359741159566484212'>🗳</tg-emoji></b>\n\nSent: {sent} <tg-emoji emoji-id='5406631276042002796'>📨</tg-emoji>\nErrors: {failed} <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>"
+        "proccess": "Broadcast is in progress, please wait... <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji>",
+        "done": "<b>Broadcast completed successfully <tg-emoji emoji-id='5359741159566484212'>🗳</tg-emoji></b>\n\nSent: {sent} <tg-emoji emoji-id='5406631276042002796'>📨</tg-emoji>\nFailed: {failed} <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>"
       },
       "info": "<b>Global Bot Information</b>\n\nUsers in database: {users_count} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nVia referral system: {came_by_referal}\n\nStars purchased: <b>{stars_bought} ({dollar_stars}$)</b>\nVia Adamant Balance: <b>{via_adamant_stars} ({via_adamant_stars_usd}$)</b>\nVia TON: <b>{via_ton_stars} ({via_ton_stars_usd}$)</b>\nVia Cryptomus: <b>{via_cryptomus_stars} ({via_cryptomus_stars_usd}$)</b>\n\nTotal completed orders: <b>{completed_orders}</b>"
     }
   },
   "payment": {
-    "ton": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> Invoice valid for 30 minutes <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\n<b>Order Details <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji></b>\n{amount} Telegram Stars to user @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>Payment Requisites <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nNetwork: {source} <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nAmount: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nAddress: <code>{BANK}</code>\nComment (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Send the exact amount and comment to the specified address, otherwise the payment will NOT BE COUNTED</b>",
+    "ton": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Invoice is valid for 30 minutes</b>\n\n<b>Order details <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n{amount} Telegram Stars to @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>Payment details <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nNetwork: TON <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nAmount: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nAddress: <code>{BANK}</code>\nComment (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Send the exact amount and comment to the specified address, otherwise the payment WILL NOT BE COUNTED</b>",
     "slow": {
-      "usd": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> Automatic payment with this method is not available yet <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\nWe deeply apologize and hope it will be available soon. For now, you can top up your <b>Adamant Balance</b> via support below <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>\n\n<b>You can send any desired amount to the cards <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji>\n<tg-emoji emoji-id='5242493418583660617'>💰</tg-emoji> Visa: <code>4297140070403256</code> (F.G.)\n<tg-emoji emoji-id='5240215896210839942'>💰</tg-emoji> MasterCard: <code>5259357077807353</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you don't contact support within half an hour of sending, your top-up will NOT BE COUNTED. Please also send the receipt and your Telegram ID (/id) for maximum speed</b>",
-      "uzs": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> Automatic payment with this method is not available yet <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\nWe deeply apologize and hope it will be available soon. For now, you can top up your <b>Adamant Balance</b> via support below <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>\n\n<b>You can send any desired amount to the cards <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji>\n<tg-emoji emoji-id='5240219744501536412'>💰</tg-emoji> Uzcard: <code>5614685200470271</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you don't contact support within half an hour of sending, your top-up will NOT BE COUNTED. Please also send the receipt and your Telegram ID (/id) for maximum speed</b>"
+      "usd": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Automatic payment via this method is not yet available</b>\n\nWe sincerely apologize and hope it will be available soon. In the meantime, you can top up your <b>Adamant Balance</b> via support below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>You can transfer any desired amount to the cards:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Visa: <code>4297140070403256</code> (F.G.)\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> MasterCard: <code>5259357077807353</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you do not contact support within half an hour of sending, your top-up WILL NOT BE COUNTED. Please also immediately send your receipt and Telegram ID (/id) for maximum processing speed</b>",
+      "uzs": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Automatic payment via this method is not yet available</b>\n\nWe sincerely apologize and hope it will be available soon. In the meantime, you can top up your <b>Adamant Balance</b> via support below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>You can transfer any desired amount to the cards:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Uzcard: <code>5614685200470271</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you do not contact support within half an hour of sending, your top-up WILL NOT BE COUNTED. Please also immediately send your receipt and Telegram ID (/id) for maximum processing speed</b>"
     },
-    "cryptomus": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> Invoice valid for 1 hour <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\n<b>Order Details <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji></b>\n{amount} Telegram Stars to user @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>Payment Requisites <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nNetwork: {source} <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nAmount: <code>{amount_usd}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nPayment link: {link}\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Pay the order via the link in the requisites or via the button below (both options are identical)</b>",
-    "success": "<b><tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji> Payment Received <tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji></b>\n\n<b>Order Details <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji></b>\nNetwork: {provider}\nAmount: {cost} <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nQuantity: {amount} <tg-emoji emoji-id='5469741319330996757'>💫</tg-emoji>\nRecipient: @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you still haven't received the order, please wait a few minutes <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji></b>",
-    "source": "Select a payment method from the options below <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>\n\n<b><tg-emoji emoji-id='5319073733443363010'>💎</tg-emoji> Adamant Balance: {adamant_balance} coins</b>",
+    "cryptomus": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Invoice is valid for 1 hour</b>\n\n<b>Order details <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n{amount} Telegram Stars to @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>Payment details <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nNetwork: Cryptomus <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nAmount: <code>{amount_usd}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nPayment link: {link}\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Pay the order via the link in the details or using the button below (both options are identical)</b>",
+    "success": "<b><tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji> Payment received <tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji></b>\n\n<b>Order details <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\nNetwork: {provider}\nAmount: {cost} <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nProduct: {product}\nRecipient: @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you have not yet received your order, please wait a few minutes <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji></b>",
+    "source": "Select a payment method from the options below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b><tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance}</b>",
     "top_up": "Your <b>Adamant Balance</b> has been successfully topped up by <b>{amount} coins <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji></b>\n\nYour current balance is: <b>{balance} coins</b>"
   },
   "button": {
@@ -85,23 +87,23 @@
       "mini_games": "Gifts",
       "support": "Support",
       "channel": "Channel",
-      "change_language": "Change Language"
+      "change_language": "Change language"
     },
     "admin": {
       "unban": "Unban",
       "ban": "Ban",
-      "fire": "Fire",
-      "hire": "Hire",
-      "list": "Admins List",
-      "users_staff": "Users Staff",
+      "fire": "Dismiss",
+      "hire": "Add",
+      "list": "Administrator list",
+      "users_staff": "User staff",
       "broadcast": "Broadcast"
     },
     "languages": {
-      "ru": "Russian",
+      "ru": "Русский",
       "en": "English",
-      "uz": "Uzbek"
+      "uz": "O'zbek"
     },
-    "profile": "Your Profile",
+    "profile": "Your profile",
     "yes": "Yes",
     "no": "No",
     "payment": {
@@ -115,22 +117,36 @@
     },
     "buy_list": {
       "stars": "Stars",
-      "premium": "Premium Subscription",
-      "gifts": "Buy Gifts",
-      "another": "Change Sender",
-      "another_star": "Change Sender"
+      "premium": "Premium subscription",
+      "gifts": "Buy gifts",
+      "another": "Change sender"
+    },
+    "premium": {
+      "year": "1 Year",
+      "half": "6 Months",
+      "three": "3 Months"
+    },
+    "gifts": {
+      "anonim": {
+        "yes": "Anonymous: Yes",
+        "no": "Anonymous: No"
+      },
+      "comment": {
+        "self": "Add a comment",
+        "without": "Send without comment"
+      }
     }
   },
   "referal": {
-    "self": "Here is your referral link: <code>{link}</code>\n\nPeople joined via your link: {came} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nStars purchased: <b>{stars_bought} ({dollar_stars}$)</b>\nYour share: <b>{users_money} coins</b>\n\n<tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> All your earnings are automatically added to your <b>Adamant Balance</b>"
+    "self": "Here is your referral link: <code>{link}</code>\n\nPeople who came via your referral link\nUsers: {came} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nStars earned: <b>{stars_bought} ({dollar_stars}$)</b>\nYour share: <b>{users_money} coins</b>\n\n<tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> All your earnings are automatically added to your <b>Adamant Balance</b>"
   },
   "error": {
     "simple": "Error",
-    "balance": "You don't have enough coins on Adamant Balance 🚫",
-    "not_yet": "This feature is not available yet...🚫",
-    "critical_error": "<b>A critical error occurred <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\nPlease try again later and contact support...",
-    "fragment": "<b>A critical error occurred <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nYou made a payment, but your order failed. Please contact support, we will definitely help you 🙏",
+    "balance": "You do not have enough coins in your Adamant Balance 🚫",
+    "not_yet": "This feature is not yet available... 🚫",
+    "critical_error": "<b>A critical error has occurred <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\nPlease try again later and contact support...",
+    "fragment": "<b>A critical error has occurred <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nYou made a payment, but your order did not go through. Please contact support and we will definitely help you 🙏",
     "fragment_retry": "<b>Temporary order processing error <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nWe will automatically retry.\nAttempt: {attempt}/{max_attempts}",
-    "adamant_not_charged": "<b>An error occurred while processing the order <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nCoins from Adamant Balance were not deducted. Try again later or contact support."
+    "adamant_not_charged": "<b>An error occurred while processing the order <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nCoins were not deducted from your Adamant Balance. Please try again later or contact support."
   }
 }

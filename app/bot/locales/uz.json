@@ -1,107 +1,109 @@
 {
   "menu": {
-    "start": "<b>Adamant Stars botiga xush kelibsiz <tg-emoji emoji-id='5920332557466997677'>🏪</tg-emoji></b>\n\nUshbu bot KYC tekshiruvisiz eng arzon narxlarda Telegram yulduzlarini sotib olish uchun yaratilgan.\nBotdan foydalanish orqali siz quyidagilar bilan tanishganingizni va roziligingizni tasdiqlaysiz:\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> <a href='https://telegra.ph/Polzovatelskoe-soglashenie---StarBankuz-11-21'>Foydalanuvchi shartnomasi</a>\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> <a href='https://telegra.ph/Politika-konfidencialnosti---StarBankuz-11-21'>Maxfiylik siyosati</a>",
+    "start": "<b>Adamant Stars ga xush kelibsiz <tg-emoji emoji-id='5920332557466997677'>🏪</tg-emoji></b>\n\nUshbu bot KYC tasdiqlanmasdan Telegram yulduzlarini eng past narxlarda sotib olish uchun yaratilgan.\nBotdan foydalanib, siz quyidagilarni o'qib chiqqaningizni va roziligingizni tasdiqlaysiz:\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> <a href='https://telegra.ph/Polzovatelskoe-soglashenie---StarBankuz-11-21'>Foydalanuvchi shartnomasi</a>\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> <a href='https://telegra.ph/Politika-konfidencialnosti---StarBankuz-11-21'>Maxfiylik siyosati</a>",
     "buy_list": {
-      "self": "<b>Sotib olmoqchi bo'lgan mahsulotni tanlang <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji></b>",
+      "self": "<b>Sotib olmoqchi bo'lgan mahsulotingizni tanlang <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji></b>",
       "stars": {
-        "self": "<b>Sizga kerak bo'lgan yulduzlar miqdorini kiriting <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: <code>{MIN_STARS}</code>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maksimum: <code>{MAX_STARS}</code>\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Yuborish: @{username}",
-        "amount_error": "<b>Iltimos, sotib olmoqchi bo'lgan yulduzlarning haqiqiy miqdorini kiriting <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: {MIN_STARS}\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maksimum: {MAX_STARS}\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Yuborish: @{username}",
-        "username_self_error": "<b>Sizning hisobingizda foydalanuvchi nomi (username) mavjud emas <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nIltimos, uni o'rnating, aks holda biz mahsulotni yubora olmaymiz",
-        "username_error": "<b>Foydalanuvchi nomi to'g'riligini tekshiring <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nUshbu foydalanuvchi nomi tekshiruvdan o'tmadi, to'g'riligiga ishonch hosil qiling va qaytadan urinib ko'ring",
-        "username": "<b>Iltimos, yulduzlar yuboriladigan foydalanuvchi nomini kiriting <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
-        "correct_form": "<b>Iltimos, formatdan foydalaning:</b> <code>/stars username miqdor</code>\nMasalan: <code>/stars durov 100</code>"
+        "self": "<b>Kerakli yulduzlar sonini kiriting <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: <code>{MIN_STARS}</code>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maksimum: <code>{MAX_STARS}</code>\n\n<tg-emoji emoji-id='5771887475421090729'>👤</tg-emoji> Yuborish manzili: @{username}",
+        "amount_error": "<b>Iltimos, sotib olmoqchi bo'lgan yulduzlarning haqiqiy sonini yuboring <tg-emoji emoji-id='5890848474563352982'>🪙</tg-emoji></b>\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Minimum: {MIN_STARS}\n<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Maksimum: {MAX_STARS}\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Yuborish manzili: @{username}",
+        "username_self_error": "<b>Sizning akkauntingizda username yo'q <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nIltimos, uni o'rnating, aks holda biz sizga mahsulotni yubora olmaymiz",
+        "username_error": "<b>Iltimos, username to'g'riligini tekshiring <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nUshbu username asosiy tekshiruvdan o'tmadi. To'g'riligiga ishonch hosil qiling va qayta yuboring",
+        "username": "<b>Iltimos, yulduzlar yuboriladigan akkauntning username ini kiriting <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "correct_form": "<b>Iltimos, quyidagi formatdan foydalaning:</b> <code>/stars username miqdor</code>\nMasalan: <code>/stars durov 100</code>"
       },
       "premium": {
-        "self": "<b>Sizga kerak bo'lgan Premium obunani tanlang <tg-emoji emoji-id='5886685105065300941'>⭐️</tg-emoji></b>\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Yuborish: @{username}",
-        "username": "<b>Iltimos, Premium yuboriladigan foydalanuvchi nomini kiriting <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
-        "username_self_error": "<b>Sizning hisobingizda foydalanuvchi nomi (username) mavjud emas <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nIltimos, uni o'rnating, aks holda biz mahsulotni yubora olmaymiz",
-        "username_error": "<b>Foydalanuvchi nomi to'g'riligini tekshiring <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nUshbu foydalanuvchi nomi tekshiruvdan o'tmadi, to'g'riligiga ishonch hosil qiling va qaytadan urinib ko'ring"
+        "self": "<b>Kerakli Telegram Premium obunasini tanlang <tg-emoji emoji-id='5879905000972358125'>👥</tg-emoji></b>\n\n<tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji> Yuborish manzili: @{username}",
+        "username": "<b>Iltimos, Premium obuna yuboriladigan akkauntning username ini kiriting <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "username_self_error": "<b>Sizning akkauntingizda username yo'q <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nIltimos, uni o'rnating, aks holda biz sizga mahsulotni yubora olmaymiz",
+        "username_error": "<b>Iltimos, username to'g'riligini tekshiring <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nUshbu username asosiy tekshiruvdan o'tmadi. To'g'riligiga ishonch hosil qiling va qayta urinib ko'ring",
+        "already_has": "<b>Iltimos, username to'g'riligini tekshiring <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nUsername to'g'ri, lekin bu akkauntda allaqachon Telegram Premium obunasi mavjud. Boshqa akkaunt bilan qayta urinib ko'ring"
       },
       "gifts": {
-        "username": "<b>Iltimos, sovg'a yuboriladigan foydalanuvchi nomini kiriting <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>вќ—пёЏ</tg-emoji>",
-        "comment_input": "<b>Sovg'a uchun izoh yuboring <tg-emoji emoji-id='6039404727542747508'>вЊЁ</tg-emoji></b>\n\n255 tagacha belgi yuborishingiz mumkin.",
-        "self": "Sotib olmoqchi bo'lgan sovg'angizni tanlang <tg-emoji emoji-id='6037175527846975726'>🎁</tg-emoji>"
+        "comment_input": "<b>Sovg'a uchun izoh yuboring <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\n255 tagacha belgi yuborishingiz mumkin.",
+        "self": "Sotib olmoqchi bo'lgan sovg'angizni tanlang <tg-emoji emoji-id='6037175527846975726'>🎁</tg-emoji>\n\n<tg-emoji emoji-id='5771887475421090729'>👤</tg-emoji> Yuborish manzili: @{username}\n\n<tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance}",
+        "username": "<b>Iltimos, sovg'a yuboriladigan akkauntning username ini kiriting <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\nUsername haqiqiy ekanligiga ishonch hosil qiling <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "selected": "<b>Sovg'aga izoh qo'shmoqchimisiz? <tg-emoji emoji-id='6039404727542747508'>⌨</tg-emoji></b>\n\n<tg-emoji emoji-id='5883997877172179131'>🖋</tg-emoji> Sovg'aga <b>istalgan izoh</b> yozishingiz mumkin, <b>255 belgigacha, u sovg'a bilan birga yuboriladi</b>\n\n<b>Siz tanlagan sovg'a: <tg-emoji emoji-id={emojiID}>{emojiIcon}</tg-emoji></b>"
       }
     },
-    "support": "Quyidagi havola orqali qo'llab-quvvatlash xizmatiga murojaat qilishingiz mumkin <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>",
-    "language": "Quyidagi tillardan birini tanlang <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>",
-    "profile": "<b><tg-emoji emoji-id='5778145208411624388'>👤</tg-emoji> Foydalanuvchi ma'lumotlari {username}</b>\n\n<tg-emoji emoji-id='5927118708873892465'>✈️</tg-emoji> Telegram ID: <code>{tg_id}</code>\n<tg-emoji emoji-id='6028338546736107668'>⭐️</tg-emoji> Sotib olingan yulduzlar: {stars_spend}\n<tg-emoji emoji-id='5836907383292436018'>💎</tg-emoji> Unvon: {value}\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> Ban holati: {is_banned}\n\n<b><tg-emoji emoji-id='5319073733443363010'>💎</tg-emoji> Adamant Balans: {adamant_balance} coins</b>",
-    "id": "<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Sizning shaxsiy Telegram ID: <code>{tg_id}</code>",
+    "support": "Quyidagi havola orqali qo'llab-quvvatlash xizmatiga murojaat qilishingiz mumkin <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>",
+    "language": "Quyidagi tillardan birini tanlang <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>",
+    "profile": "<b><tg-emoji emoji-id='5778145208411624388'>👤</tg-emoji> {username} foydalanuvchisi haqida ma'lumot</b>\n\n<tg-emoji emoji-id='5927118708873892465'>✈️</tg-emoji> Telegram ID: <code>{tg_id}</code>\n<tg-emoji emoji-id='6028338546736107668'>⭐️</tg-emoji> Sotib olingan yulduzlar: {stars_spend}\n<tg-emoji emoji-id='5836907383292436018'>💎</tg-emoji> Daraja: {value}\n<tg-emoji emoji-id='5778570255555105942'>🔒</tg-emoji> Ban holati: {is_banned}\n\n<b><tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance} tanga</b>",
+    "id": "<tg-emoji emoji-id='5886285355279193209'>🏷</tg-emoji> Sizning shaxsiy Telegram ID ingiz: <code>{tg_id}</code>",
     "admin": {
       "self": "Hurmatli administrator, qaysi variantni tanlaysiz? <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
-      "false": "Ushbu buyruqdan foydalanish uchun sizda yetarli huquqlar yo'q <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
-      "true": "Assalomu alaykum hurmatli administrator, nima qilishni xohlaysiz?",
+      "false": "Ushbu buyruqdan foydalanish uchun sizda yetarli vakolat yo'q <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
+      "true": "Salom hurmatli administrator, nima qilmoqchisiz?",
       "admins_list": {
-        "self": "<b>Hozirgi administratorlar ro'yxati <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji></b>\n\n{admins_list}"
+        "self": "<b>Joriy administratorlar ro'yxati <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji></b>\n\n{admins_list}"
       },
-      "user_info": "<b>@{username} foydalanuvchisi haqida ma'lumot <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji></b>\n\nTelegram ID: <code>{tg_id}</code> <tg-emoji emoji-id='5422683699130933153'>🪪</tg-emoji>\nSotib olingan yulduzlar: {stars_spend} <tg-emoji emoji-id='5469741319330996757'>💫</tg-emoji>\nUnvon: {value}\nBan holati: {is_banned}\n\n<b><tg-emoji emoji-id='5312209602610237270'>💎</tg-emoji> Adamant Balans: {adamant_balance} coins</b>",
-      "success_user_ban": "Foydalanuvchi {tg_id} muvaffaqiyatli {banned}",
+      "user_info": "<b>@{username} foydalanuvchisi haqida ma'lumot <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji></b>\n\nTelegram ID: <code>{tg_id}</code> <tg-emoji emoji-id='5422683699130933153'>🪪</tg-emoji>\nSotib olingan yulduzlar: {stars_spend} <tg-emoji emoji-id='5469741319330996757'>💫</tg-emoji>\nDaraja: {value}\nBan holati: {is_banned}\n\n<b><tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance} tanga</b>",
+      "success_user_ban": "{tg_id} foydalanuvchisi muvaffaqiyatli {banned}",
       "status": {
         "admin": "Administrator",
         "user": "Foydalanuvchi",
         "banned": "Bloklangan",
-        "free": "Ochiq",
-        "ban_action": "bloklandi",
-        "unban_action": "blokdan chiqarildi"
+        "free": "Faol",
+        "ban_action": "Bloklandi",
+        "unban_action": "Blokdan chiqarildi"
       },
-      "logs": "Yuqorida barcha joriy loglar fayli <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
+      "logs": "Barcha joriy loglar bilan fayl yuqorida <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
       "database": "<b>Joriy ma'lumotlar bazasi:</b>\n<code>{db_url}</code>",
-      "clear_logs": "<b>Barcha loglar muvaffaqiyatli tozalandi <tg-emoji emoji-id='5445267414562389170'>🗑</tg-emoji></b>\nYuqorida barcha eski loglar fayli <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
+      "clear_logs": "<b>Barcha loglar muvaffaqiyatli tozalandi <tg-emoji emoji-id='5445267414562389170'>🗑</tg-emoji></b>\nBarcha eski loglar bilan fayl yuqorida <tg-emoji emoji-id='5469718869536940860'>👆</tg-emoji>",
       "staff": {
-        "self": "Ma'lumotlarini ko'rmoqchi bo'lgan foydalanuvchining Telegram ID sini yuboring <tg-emoji emoji-id='5431736674147114227'>🗂</tg-emoji>",
-        "id_error": "Bunday ID li foydalanuvchi bazadan topilmadi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
+        "self": "Ma'lumotini ko'rmoqchi bo'lgan foydalanuvchining Telegram ID sini yuboring <tg-emoji emoji-id='5431736674147114227'>🗂</tg-emoji>",
+        "id_error": "Bunday ID li foydalanuvchi ma'lumotlar bazasida topilmadi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji>",
         "hire": {
-          "success": "Foydalanuvchi <a href='tg://user?id={tg_id}'>{tg_id}</a> muvaffaqiyatli administrator etib tayinlandi <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
-          "wait_id": "Administratorlikka qo'shmoqchi bo'lgan foydalanuvchining Telegram ID sini yuboring <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
+          "success": "<a href='tg://user?id={tg_id}'>{tg_id}</a> foydalanuvchisi muvaffaqiyatli administrator lavozimiga tayinlandi <tg-emoji emoji-id='5190458330719461749'>🧑‍💻</tg-emoji>",
+          "wait_id": "Administrator lavozimiga qo'shmoqchi bo'lgan foydalanuvchining Telegram ID sini yuboring <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
         },
         "fire": {
-          "success": "Foydalanuvchi <a href='tg://user?id={tg_id}'>{tg_id}</a> administratorlikdan muvaffaqiyatli olib tashlandi <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
-          "wait_id": "Administratorlikdan olib tashlamoqchi bo'lgan foydalanuvchining Telegram ID sini yuboring <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
+          "success": "<a href='tg://user?id={tg_id}'>{tg_id}</a> foydalanuvchisi administrator lavozimidan muvaffaqiyatli olib tashlandi <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>",
+          "wait_id": "Administrator lavozimidan olib tashlamoqchi bo'lgan foydalanuvchining Telegram ID sini yuboring <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji>"
         }
       },
       "broadcast": {
-        "ask": "Xabar yuborish uchun matnni yuboring <tg-emoji emoji-id='5352896944496728039'>📭</tg-emoji>",
-        "confirm": "Ushbu xabarni barcha foydalanuvchilarga yuborishga ishonchingiz komilmi?",
-        "proccess": "Xabar yuborish jarayoni, kuting... <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji>",
-        "done": "<b>Xabar yuborish muvaffaqiyatli yakunlandi <tg-emoji emoji-id='5359741159566484212'>🗳</tg-emoji></b>\n\nYuborildi: {sent} <tg-emoji emoji-id='5406631276042002796'>📨</tg-emoji>\nXatolar: {failed} <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>"
+        "ask": "Ommaviy xabar uchun xabarni yuboring <tg-emoji emoji-id='5352896944496728039'>📭</tg-emoji>",
+        "confirm": "Haqiqatan ham bu xabarni barcha foydalanuvchilarga yubormoqchimisiz?",
+        "proccess": "Ommaviy xabar yuborilmoqda, iltimos kuting... <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji>",
+        "done": "<b>Ommaviy xabar muvaffaqiyatli yakunlandi <tg-emoji emoji-id='5359741159566484212'>🗳</tg-emoji></b>\n\nYuborildi: {sent} <tg-emoji emoji-id='5406631276042002796'>📨</tg-emoji>\nXatolar: {failed} <tg-emoji emoji-id='5465665476971471368'>❌</tg-emoji>"
       },
-      "info": "<b>Bot haqida global ma'lumot</b>\n\nBazadagi foydalanuvchilar: {users_count} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nReferal tizimi orqali: {came_by_referal}\n\nSotib olingan yulduzlar: <b>{stars_bought} ({dollar_stars}$)</b>\nAdamant Balans orqali: <b>{via_adamant_stars} ({via_adamant_stars_usd}$)</b>\nTON orqali: <b>{via_ton_stars} ({via_ton_stars_usd}$)</b>\nCryptomus orqali: <b>{via_cryptomus_stars} ({via_cryptomus_stars_usd}$)</b>\n\nJami yakunlangan buyurtmalar: <b>{completed_orders}</b>"
+      "info": "<b>Bot haqida umumiy ma'lumot</b>\n\nMa'lumotlar bazasidagi foydalanuvchilar: {users_count} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nReferal tizimi orqali: {came_by_referal}\n\nSotib olingan yulduzlar: <b>{stars_bought} ({dollar_stars}$)</b>\nAdamant Balance orqali: <b>{via_adamant_stars} ({via_adamant_stars_usd}$)</b>\nTON orqali: <b>{via_ton_stars} ({via_ton_stars_usd}$)</b>\nCryptomus orqali: <b>{via_cryptomus_stars} ({via_cryptomus_stars_usd}$)</b>\n\nJami yakunlangan buyurtmalar: <b>{completed_orders}</b>"
     }
   },
   "payment": {
-    "ton": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> To'lov 30 daqiqa davomida amal qiladi <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji></b>\n@{username} foydalanuvchisiga {amount} Telegram Stars <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>To'lov rekvizitlari <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nTarmoq: {source} <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nMiqdor: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nManzil: <code>{BANK}</code>\nIzoh (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Ko'rsatilgan manzilga aniq miqdor va izohni yuboring, aks holda to'lov HISOBLANMAYDI</b>",
+    "ton": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Hisob-faktura 30 daqiqa amal qiladi</b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n@{username} ga {amount} ta Telegram Stars <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>To'lov rekvizitlari <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nTarmoq: TON <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nMiqdor: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nManzil: <code>{BANK}</code>\nIzoh (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Ko'rsatilgan manzilga aniq miqdor va izohni yuboring, aks holda to'lov HISOBGA OLINMAYDI</b>",
     "slow": {
-      "usd": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> Ushbu usul bilan avtomatik to'lov hali mavjud emas <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\nKeltirilgan noqulayliklar uchun uzr so'raymiz va tez orada mavjud bo'lishiga umid qilamiz, hozircha siz <b>Adamant Balansni</b> pastdagi qo'llab-quvvatlash orqali to'ldirishingiz mumkin <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>\n\n<b>Xohlagan summani kartalarga yuborishingiz mumkin <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji>\n<tg-emoji emoji-id='5242493418583660617'>💰</tg-emoji> Visa: <code>4297140070403256</code> (F.G.)\n<tg-emoji emoji-id='5240215896210839942'>💰</tg-emoji> MasterCard: <code>5259357077807353</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar yuborganingizdan keyin yarim soat ichida qo'llab-quvvatlash xizmatiga yozmasangiz, to'lovingiz HISOBLANMAYDI, shuningdek tezroq ko'rib chiqish uchun chek va Telegram ID (/id) ni yuboring</b>",
-      "uzs": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> Ushbu usul bilan avtomatik to'lov hali mavjud emas <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\nKeltirilgan noqulayliklar uchun uzr so'raymiz va tez orada mavjud bo'lishiga umid qilamiz, hozircha siz <b>Adamant Balansni</b> pastdagi qo'llab-quvvatlash orqali to'ldirishingiz mumkin <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>\n\n<b>Xohlagan summani kartalarga yuborishingiz mumkin <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji>\n<tg-emoji emoji-id='5240219744501536412'>💰</tg-emoji> Uzcard: <code>5614685200470271</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar yuborganingizdan keyin yarim soat ichida qo'llab-quvvatlash xizmatiga yozmasangiz, to'lovingiz HISOBLANMAYDI, shuningdek tezroq ko'rib chiqish uchun chek va Telegram ID (/id) ni yuboring</b>"
+      "usd": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Bu usul orqali avtomatik to'lov hali mavjud emas</b>\n\nChuqur uzr so'raymiz va tez orada mavjud bo'lishini umid qilamiz. Hozircha quyidagi qo'llab-quvvatlash orqali <b>Adamant Balance</b> ni to'ldirishingiz mumkin <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>Istalgan miqdorni quyidagi kartalarga o'tkazishingiz mumkin:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Visa: <code>4297140070403256</code> (F.G.)\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> MasterCard: <code>5259357077807353</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar yuborishdan yarim soat ichida qo'llab-quvvatlashga yozmasangiz, to'ldirishingiz HISOBGA OLINMAYDI. Shuningdek, darhol chek va Telegram ID ingizni (/id) yuboring</b>",
+      "uzs": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Bu usul orqali avtomatik to'lov hali mavjud emas</b>\n\nChuqur uzr so'raymiz va tez orada mavjud bo'lishini umid qilamiz. Hozircha quyidagi qo'llab-quvvatlash orqali <b>Adamant Balance</b> ni to'ldirishingiz mumkin <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>Istalgan miqdorni quyidagi kartaga o'tkazishingiz mumkin:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Uzcard: <code>5614685200470271</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar yuborishdan yarim soat ichida qo'llab-quvvatlashga yozmasangiz, to'ldirishingiz HISOBGA OLINMAYDI. Shuningdek, darhol chek va Telegram ID ingizni (/id) yuboring</b>"
     },
-    "cryptomus": "<b><tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji> To'lov 1 soat davomida amal qiladi <tg-emoji emoji-id='5467890025217661107'>‼️</tg-emoji></b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji></b>\n@{username} foydalanuvchisiga {amount} Telegram Stars <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>To'lov rekvizitlari <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nTarmoq: {source} <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nMiqdor: <code>{amount_usd}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nTo'lov uchun havola: {link}\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Buyurtmani rekvizitlardagi havola orqali yoki pastdagi tugma orqali to'lang (ikkala variant ham bir xil)</b>",
-    "success": "<b><tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji> To'lov qabul qilindi <tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji></b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='6021462012037437193'>🎁</tg-emoji></b>\nTarmoq: {provider}\nMiqdor: {cost} <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nSoni: {amount} <tg-emoji emoji-id='5469741319330996757'>💫</tg-emoji>\nQabul qiluvchi: @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar siz hali ham buyurtmani olmagan bo'lsangiz, iltimos, bir necha daqiqa kuting <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji></b>",
-    "source": "Quyidagi variantlardan to'lov usulini tanlang <tg-emoji emoji-id='5470177992950946662'>👇</tg-emoji>\n\n<b><tg-emoji emoji-id='5319073733443363010'>💎</tg-emoji> Adamant Balans: {adamant_balance} coins</b>",
-    "top_up": "Sizning <b>Adamant Balansingiz</b> muvaffaqiyatli <b>{amount} coins <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji></b> ga to'ldirildi\n\nSizning hozirgi balansingiz: <b>{balance} coins</b>"
+    "cryptomus": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Hisob-faktura 1 soat amal qiladi</b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n@{username} ga {amount} ta Telegram Stars <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>To'lov rekvizitlari <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nTarmoq: Cryptomus <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nMiqdor: <code>{amount_usd}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nTo'lov havolasi: {link}\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Rekvizitlardagi havola orqali yoki quyidagi tugma orqali buyurtmani to'lang (ikkala variant bir xil)</b>",
+    "success": "<b><tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji> To'lov qabul qilindi <tg-emoji emoji-id='5436040291507247633'>🎉</tg-emoji></b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\nTarmoq: {provider}\nMiqdor: {cost} <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nMahsulot: {product}\nQabul qiluvchi: @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar buyurtmangizni hali olmagan bo'lsangiz, iltimos bir necha daqiqa kuting <tg-emoji emoji-id='5451732530048802485'>⏳</tg-emoji></b>",
+    "source": "Quyidagi variantlardan to'lov usulini tanlang <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b><tg-emoji emoji-id='5769126056262898415'>👛</tg-emoji> Adamant Balance: {adamant_balance}</b>",
+    "top_up": "Sizning <b>Adamant Balance</b> ingiz muvaffaqiyatli <b>{amount} tanga <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji></b> ga to'ldirildi\n\nJoriy balans: <b>{balance} tanga</b>"
   },
   "button": {
     "main": {
       "purchase": "Sotib olish",
       "mini_games": "Sovg'alar",
-      "support": "Yordam",
+      "support": "Qo'llab-quvvatlash",
       "channel": "Kanal",
       "change_language": "Tilni o'zgartirish"
     },
     "admin": {
       "unban": "Blokdan chiqarish",
       "ban": "Bloklash",
-      "fire": "O'chirish",
+      "fire": "Ishdan bo'shatish",
       "hire": "Qo'shish",
-      "list": "Adminlar ro'yxati",
-      "users_staff": "Foydalanuvchilar shtabi",
-      "broadcast": "Xabar yuborish"
+      "list": "Administratorlar ro'yxati",
+      "users_staff": "Foydalanuvchilar bo'limi",
+      "broadcast": "Ommaviy xabar"
     },
     "languages": {
       "ru": "Русский",
       "en": "English",
-      "uz": "O'zbekcha"
+      "uz": "O'zbek"
     },
-    "profile": "Sizning profilingiz",
+    "profile": "Profilingiz",
     "yes": "Ha",
     "no": "Yo'q",
     "payment": {
@@ -117,20 +119,34 @@
       "stars": "Yulduzlar",
       "premium": "Premium obuna",
       "gifts": "Sovg'a sotib olish",
-      "another": "Yuboruvchini o'zgartirish",
-      "another_star": "Yuboruvchini o'zgartirish"
+      "another": "Yuboruvchini o'zgartirish"
+    },
+    "premium": {
+      "year": "1 Yil",
+      "half": "6 Oy",
+      "three": "3 Oy"
+    },
+    "gifts": {
+      "anonim": {
+        "yes": "Anonim: Ha",
+        "no": "Anonim: Yo'q"
+      },
+      "comment": {
+        "self": "Izoh qo'shish",
+        "without": "Izovsiz yuborish"
+      }
     }
   },
   "referal": {
-    "self": "Sizning referal havolangiz: <code>{link}</code>\n\nSizning havolangiz orqali kelganlar\nOdamlar: {came} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nSotib olingan yulduzlar: <b>{stars_bought} ({dollar_stars}$)</b>\nSizning ulushingiz: <b>{users_money} coins</b>\n\n<tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Barcha daromadingiz avtomatik ravishda <b>Adamant Balansingizga</b> tushadi"
+    "self": "Mana sizning referal havolangiz: <code>{link}</code>\n\nSizning referal havolangiz orqali kelganlar\nFoydalanuvchilar: {came} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\nOlingan yulduzlar: <b>{stars_bought} ({dollar_stars}$)</b>\nSizning ulushingiz: <b>{users_money} tanga</b>\n\n<tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Barcha daromadingiz avtomatik ravishda <b>Adamant Balance</b> ingizga o'tkaziladi"
   },
   "error": {
-    "simple": "Xato",
-    "balance": "Adamant Balansingizda coins yetarli emas 🚫",
-    "not_yet": "Ushbu funksiya hali mavjud emas...🚫",
-    "critical_error": "<b>Kritik xato yuz berdi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\nIltimos, keyinroq urinib ko'ring va qo'llab-quvvatlash xizmatiga murojaat qiling...",
-    "fragment": "<b>Kritik xato yuz berdi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nSiz to'lovni amalga oshirdingiz, lekin buyurtmangiz amalga oshmadi. Iltimos, yordam xizmatiga yozing, biz albatta yordam beramiz 🙏",
-    "fragment_retry": "<b>Buyurtmani qayta ishlashda vaqtinchalik xato <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nBiz avtomatik ravishda qayta urinib ko'ramiz.\nUrinish: {attempt}/{max_attempts}",
-    "adamant_not_charged": "<b>Buyurtmani qayta ishlashda xato yuz berdi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nAdamant Balansdan coins yechilmadi. Keyinroq urinib ko'ring yoki yordam xizmatiga murojaat qiling."
+    "simple": "Xatolik",
+    "balance": "Adamant Balance da yetarli tanga yo'q 🚫",
+    "not_yet": "Bu funksiya hali mavjud emas... 🚫",
+    "critical_error": "<b>Kritik xatolik yuz berdi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\nIltimos, keyinroq urinib ko'ring va qo'llab-quvvatlash xizmatiga murojaat qiling...",
+    "fragment": "<b>Kritik xatolik yuz berdi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nSiz to'lov qildingiz, lekin buyurtmangiz o'tmadi. Iltimos, qo'llab-quvvatlash xizmatiga yozing, biz albatta yordam beramiz 🙏",
+    "fragment_retry": "<b>Buyurtmani qayta ishlashda vaqtinchalik xatolik <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nBiz avtomatik ravishda qayta urinamiz.\nUrinish: {attempt}/{max_attempts}",
+    "adamant_not_charged": "<b>Buyurtmani qayta ishlashda xatolik yuz berdi <tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji></b>\n\nAdamant Balance dan tangalar yechilmadi. Iltimos, keyinroq urinib ko'ring yoki qo'llab-quvvatlash xizmatiga murojaat qiling."
   }
 }
