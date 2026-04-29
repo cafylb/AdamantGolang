@@ -4,7 +4,6 @@ import (
 	botpkg "adamant/app/bot"
 	i18n "adamant/app/bot/core/i18n"
 	requests "adamant/app/bot/database/repository"
-	database "adamant/app/bot/database"
 	utils "adamant/app/bot/utils"
 	"context"
 	"strconv"
@@ -41,6 +40,6 @@ func topUpAdamantBalance(bot *api.Bot, msg *api.Message) {
 		return
 	}
 
-	requests.ChangeAdamantBalance(context.Background(), database.Pool, int64(userID), int64(amount))
+	requests.ChangeAdamantBalance(context.Background(), int64(userID), int64(amount))
 	utils.Answer(bot, msg.Chat.ID, "Успешно")
 }

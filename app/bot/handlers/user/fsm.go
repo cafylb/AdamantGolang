@@ -160,7 +160,7 @@ func fsmUserBalance(userID int64) string {
 		return "0"
 	}
 
-	balance, err := repository.GetUserBalance(context.Background(), database.Pool, userID)
+	balance, err := repository.GetUserBalance(context.Background(), userID)
 	if err != nil {
 		return "0"
 	}

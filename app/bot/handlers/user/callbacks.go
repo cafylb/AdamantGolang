@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -11,7 +10,6 @@ import (
 	config "adamant/app/bot/config"
 	i18n "adamant/app/bot/core/i18n"
 	fsm "adamant/app/bot/data/fsm"
-	database "adamant/app/bot/database"
 	repository "adamant/app/bot/database/repository"
 	utils "adamant/app/bot/utils"
 
@@ -230,7 +228,7 @@ func uzsPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, d
 	utils.Edit(bot, callback.Message.Message(), tr.Get("payment.slow.uzs").String(), botpkg.UzdUsd(tr.Language(), data))
 }
 
-func  tonPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
+func tonPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
 	product, amount, username, ok := utils.DivideOrderData(data)
 	if !ok || product != "stars" {
 		utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())
@@ -347,9 +345,9 @@ func giftWithoutComment(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Local
 }
 
 func currentUserBalance(userID int64) int64 {
-	balance, err := repository.GetUserBalance(context.Background(), database.Pool, userID)
+	balance, err := repository.GetUserBalance(context.Background(), userID)
 	if err != nil {
-		fmt.Println(err)
+		return 0
 	}
 
 	return balance
