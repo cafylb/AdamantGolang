@@ -175,7 +175,7 @@ func PaymentSource(lang string, data string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(fmt.Sprintf("Adamant Balance (%d coins)", priceCoins)).WithCallbackData(fmt.Sprintf("pay_adamant_%s", data)).WithIconCustomEmojiID("5769126056262898415"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_cryptomus_%s", data)).WithIconCustomEmojiID("5345837435601305335"),
+			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_cryptomus_%s", data)).WithIconCustomEmojiID("5346160971192747426"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250"),

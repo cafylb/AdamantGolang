@@ -30,16 +30,11 @@ func HandleCallback(bot *api.Bot, callback *api.CallbackQuery) {
 		system := dataP[0]
 		orderData := dataP[1]
 		switch system {
-		case "ton":
-			tonPurchase(bot, callback, tr, orderData)
-		case "usd":
-			usdPurchase(bot, callback, tr, orderData)
-		case "uzs":
-			uzsPurchase(bot, callback, tr, orderData)
-		case "adamant":
-			adamantPurchase(bot, callback, tr, orderData)
-		case "cryptomus":
-			cryptomusPurchase(bot, callback, tr, orderData)
+		case "ton": tonPurchase(bot, callback, tr, orderData)
+		case "usd": usdPurchase(bot, callback, tr, orderData)
+		case "uzs": uzsPurchase(bot, callback, tr, orderData)
+		case "adamant": adamantPurchase(bot, callback, tr, orderData)
+		case "cryptomus": cryptomusPurchase(bot, callback, tr, orderData)
 		}
 		return
 	} else if strings.HasPrefix(data, "gifts_purchase") && data != "gifts_purchase" {
@@ -122,12 +117,9 @@ func HandleCallback(bot *api.Bot, callback *api.CallbackQuery) {
 		buyStarsFriend(bot, callback, tr)
 	case "buy_gifts_friend":
 		buyGiftsFriend(bot, callback, tr)
-	case "buy_premium_friend":
-		buyPremiumFriend(bot, callback, tr)
-	case "cancel":
-		cancelPurchase(bot, callback, tr)
-	case "nothing":
-		nothing(bot, callback, tr)
+	case "buy_premium_friend": buyPremiumFriend(bot, callback, tr)
+	case "cancel": cancelPurchase(bot, callback, tr)
+	case "nothing": nothing(bot, callback, tr)
 	}
 }
 
