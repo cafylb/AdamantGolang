@@ -137,6 +137,10 @@ func purchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer) {
 func premiumPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer) {
 	utils.CallbackAnswer(bot, callback)
 	username := callback.From.Username
+	if callback.From.IsPremium {
+		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.premium.user_already_has").String(), botpkg.AnotherPurchase(tr.Language(), "premium"))
+		return	
+	}
 
 	if username != "" {
 		session, _ := fsm.UserFSM.Get(callback.From.ID)

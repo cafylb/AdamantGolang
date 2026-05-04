@@ -1,6 +1,0 @@
-name = "adamant-webhook-tunnel"
-main = "cloudflare-worker-webhook.ts"
-compatibility_date = "2024-01-01"
-
-[vars]
-BOT_SERVER_URL = "http://localhost:3400"

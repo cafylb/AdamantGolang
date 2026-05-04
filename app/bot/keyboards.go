@@ -2,6 +2,7 @@ package bot
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 
 	config "adamant/app/bot/config"
@@ -163,9 +164,14 @@ func PaymentSource(lang string, data string) *api.InlineKeyboardMarkup {
 		}
 	}
 
+	usdPriceText := fmt.Sprintf("%.2f$", usdPrice)
+	if math.Mod(usdPrice, 1) == 0 {
+		usdPriceText = fmt.Sprintf("%.0f$", usdPrice)
+	}
+
 	return tu.InlineKeyboard(
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("TON (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_ton_%s", data)).WithIconCustomEmojiID("5769406891289481208"),
+			tu.InlineKeyboardButton(fmt.Sprintf("TON (%s)", usdPriceText)).WithCallbackData(fmt.Sprintf("pay_ton_%s", data)).WithIconCustomEmojiID("5769406891289481208"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton("USD").WithCallbackData(fmt.Sprintf("pay_usd_%s", data)).WithIconCustomEmojiID("5927169041595634481"),
@@ -175,7 +181,7 @@ func PaymentSource(lang string, data string) *api.InlineKeyboardMarkup {
 			tu.InlineKeyboardButton(fmt.Sprintf("Adamant Balance (%d coins)", priceCoins)).WithCallbackData(fmt.Sprintf("pay_adamant_%s", data)).WithIconCustomEmojiID("5769126056262898415"),
 		),
 		tu.InlineKeyboardRow(
-			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%.2f$)", usdPrice)).WithCallbackData(fmt.Sprintf("pay_cryptomus_%s", data)).WithIconCustomEmojiID("5346160971192747426"),
+			tu.InlineKeyboardButton(fmt.Sprintf("Other Crypto (%s)", usdPriceText)).WithCallbackData(fmt.Sprintf("pay_cryptomus_%s", data)).WithIconCustomEmojiID("5346160971192747426"),
 		),
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250"),

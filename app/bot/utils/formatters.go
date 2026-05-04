@@ -62,8 +62,8 @@ func DividePaymentData(data string) (string, int, string, string, string) {
 }
 
 func StarsToUsdCoin(amount int) (float64, int) {
-	usdAmount := config.Cfg.Price * float64(amount)
-	return usdAmount, int(usdAmount * 100)
+	priceCoins := int(math.Round(config.Cfg.Price * float64(amount) * 100))
+	return float64(priceCoins) / 100, priceCoins
 }
 
 func PremiumToUsdCoin(length string) (float64, int) {
