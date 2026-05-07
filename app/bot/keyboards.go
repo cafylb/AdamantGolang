@@ -114,6 +114,9 @@ func PayTon(lang, url string) *api.InlineKeyboardMarkup {
 		tu.InlineKeyboardRow(
 			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.payment.tonkeeper")).WithURL(url).WithIconCustomEmojiID("6037622221625626773"),
 		),
+		tu.InlineKeyboardRow(
+			tu.InlineKeyboardButton(i18n.GetFor(lang, "button.utils.back")).WithCallbackData("purchase").WithIconCustomEmojiID("5348414733806484250"),
+		),
 	)
 }
 

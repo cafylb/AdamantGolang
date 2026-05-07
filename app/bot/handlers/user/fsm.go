@@ -7,8 +7,8 @@ import (
 	"adamant/app/bot/data/fsm"
 	database "adamant/app/bot/database"
 	repository "adamant/app/bot/database/repository"
-	"adamant/app/bot/utils"
 	services "adamant/app/bot/services"
+	"adamant/app/bot/utils"
 	"context"
 	"strconv"
 	"strings"
@@ -33,7 +33,7 @@ func HandleFSM(bot *api.Bot, message *api.Message, data string) {
 
 func waitUsernameStars(bot *api.Bot, message *api.Message) {
 	tr := i18n.ForUser(message.From.ID)
-	username := message.Text
+	username := normalizeUsername(message.Text)
 	session, ok := fsm.UserFSM.Get(message.From.ID)
 	if !ok {
 		return
@@ -77,33 +77,39 @@ func waitAmount(bot *api.Bot, message *api.Message) {
 
 func waitUsernamePremium(bot *api.Bot, message *api.Message) {
 	tr := i18n.ForUser(message.From.ID)
-	username := strings.TrimSpace(message.Text)
+	username := normalizeUsername(message.Text)
 	session, ok := fsm.UserFSM.Get(message.From.ID)
 	if !ok {
-		return	
+		return
 	}
 
 	isPremium, user, err := services.FragmentService.CheckPremium(context.Background(), username, 3)
-	if user == "" || err != nil {
+	if err != nil {
 		go utils.DeleteMessage(bot, message)
 		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("error.username").String(), botpkg.Cancel(tr.Language()))
 		return
-	} else if isPremium {
+	}
+	if isPremium {
 		go utils.DeleteMessage(bot, message)
 		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("menu.buy_list.premium.already_has").String(), botpkg.Cancel(tr.Language()))
 		return
 	}
+	if user == "" {
+		go utils.DeleteMessage(bot, message)
+		utils.EditById(bot, int64(session.MessageID), message.From.ID, tr.Get("error.username").String(), botpkg.Cancel(tr.Language()))
+		return
+	}
 
-	go utils.EditById(bot, int64(session.MessageID), message.Chat.ID, tr.Get("menu.buy_list.premium.self").Format("username", username),botpkg.Premium(tr.Language()))
+	go utils.EditById(bot, int64(session.MessageID), message.Chat.ID, tr.Get("menu.buy_list.premium.self").Format("username", user), botpkg.Premium(tr.Language()))
 	utils.DeleteMessage(bot, message)
 	session.State = fsm.StateIdle
-	session.Username = username
+	session.Username = user
 	fsm.UserFSM.Set(message.From.ID, session)
 }
 
 func waitUsernameGifts(bot *api.Bot, message *api.Message) {
 	tr := i18n.ForUser(message.From.ID)
-	username := strings.TrimSpace(message.Text)
+	username := normalizeUsername(message.Text)
 	session, ok := fsm.UserFSM.Get(message.From.ID)
 	if !ok {
 		return
@@ -166,4 +172,8 @@ func fsmUserBalance(userID int64) string {
 	}
 
 	return strconv.FormatInt(balance, 10)
+}
+
+func normalizeUsername(username string) string {
+	return strings.TrimLeft(strings.TrimSpace(username), "@")
 }

@@ -71,7 +71,7 @@
     }
   },
   "payment": {
-    "ton": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Hisob-faktura 30 daqiqa amal qiladi</b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n@{username} ga {amount} ta Telegram Stars <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>To'lov rekvizitlari <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nTarmoq: TON <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nMiqdor: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nManzil: <code>{BANK}</code>\nIzoh (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Ko'rsatilgan manzilga aniq miqdor va izohni yuboring, aks holda to'lov HISOBGA OLINMAYDI</b>",
+    "ton": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Hisob-faktura 30 daqiqa amal qiladi</b>\n\n<b>Buyurtma tafsilotlari <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n{description}\n\n<b>To'lov rekvizitlari <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nTarmoq: TON <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nMiqdor: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nManzil: <code>{wallet}</code>\nIzoh (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Ko'rsatilgan manzilga aniq miqdor va izohni yuboring, aks holda to'lov HISOBGA OLINMAYDI</b>",
     "slow": {
       "usd": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Bu usul orqali avtomatik to'lov hali mavjud emas</b>\n\nChuqur uzr so'raymiz va tez orada mavjud bo'lishini umid qilamiz. Hozircha quyidagi qo'llab-quvvatlash orqali <b>Adamant Balance</b> ni to'ldirishingiz mumkin <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>Istalgan miqdorni quyidagi kartalarga o'tkazishingiz mumkin:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Visa: <code>4297140070403256</code> (F.G.)\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> MasterCard: <code>5259357077807353</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar yuborishdan yarim soat ichida qo'llab-quvvatlashga yozmasangiz, to'ldirishingiz HISOBGA OLINMAYDI. Shuningdek, darhol chek va Telegram ID ingizni (/id) yuboring</b>",
       "uzs": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Bu usul orqali avtomatik to'lov hali mavjud emas</b>\n\nChuqur uzr so'raymiz va tez orada mavjud bo'lishini umid qilamiz. Hozircha quyidagi qo'llab-quvvatlash orqali <b>Adamant Balance</b> ni to'ldirishingiz mumkin <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>Istalgan miqdorni quyidagi kartaga o'tkazishingiz mumkin:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Uzcard: <code>5614685200470271</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Agar yuborishdan yarim soat ichida qo'llab-quvvatlashga yozmasangiz, to'ldirishingiz HISOBGA OLINMAYDI. Shuningdek, darhol chek va Telegram ID ingizni (/id) yuboring</b>"
@@ -107,7 +107,7 @@
     "yes": "Ha",
     "no": "Yo'q",
     "payment": {
-      "tonkeeper": "TONKeeper ilovasida to'lash",
+      "tonkeeper": "TONKeeper orqali to'lash",
       "cryptomus": "Cryptomus orqali to'lash"
     },
     "utils": {

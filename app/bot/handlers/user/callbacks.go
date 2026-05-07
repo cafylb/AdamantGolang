@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -11,6 +12,7 @@ import (
 	i18n "adamant/app/bot/core/i18n"
 	fsm "adamant/app/bot/data/fsm"
 	repository "adamant/app/bot/database/repository"
+	services "adamant/app/bot/services"
 	utils "adamant/app/bot/utils"
 
 	api "github.com/mymmrac/telego"
@@ -30,11 +32,16 @@ func HandleCallback(bot *api.Bot, callback *api.CallbackQuery) {
 		system := dataP[0]
 		orderData := dataP[1]
 		switch system {
-		case "ton": tonPurchase(bot, callback, tr, orderData)
-		case "usd": usdPurchase(bot, callback, tr, orderData)
-		case "uzs": uzsPurchase(bot, callback, tr, orderData)
-		case "adamant": adamantPurchase(bot, callback, tr, orderData)
-		case "cryptomus": cryptomusPurchase(bot, callback, tr, orderData)
+		case "ton":
+			tonPurchase(bot, callback, tr, orderData)
+		case "usd":
+			usdPurchase(bot, callback, tr, orderData)
+		case "uzs":
+			uzsPurchase(bot, callback, tr, orderData)
+		case "adamant":
+			adamantPurchase(bot, callback, tr, orderData)
+		case "cryptomus":
+			cryptomusPurchase(bot, callback, tr, orderData)
 		}
 		return
 	} else if strings.HasPrefix(data, "gifts_purchase") && data != "gifts_purchase" {
@@ -117,9 +124,12 @@ func HandleCallback(bot *api.Bot, callback *api.CallbackQuery) {
 		buyStarsFriend(bot, callback, tr)
 	case "buy_gifts_friend":
 		buyGiftsFriend(bot, callback, tr)
-	case "buy_premium_friend": buyPremiumFriend(bot, callback, tr)
-	case "cancel": cancelPurchase(bot, callback, tr)
-	case "nothing": nothing(bot, callback, tr)
+	case "buy_premium_friend":
+		buyPremiumFriend(bot, callback, tr)
+	case "cancel":
+		cancelPurchase(bot, callback, tr)
+	case "nothing":
+		nothing(bot, callback, tr)
 	}
 }
 
@@ -136,10 +146,10 @@ func purchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer) {
 
 func premiumPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer) {
 	utils.CallbackAnswer(bot, callback)
-	username := callback.From.Username
+	username := normalizeUsername(callback.From.Username)
 	if callback.From.IsPremium {
 		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.premium.user_already_has").String(), botpkg.AnotherPurchase(tr.Language(), "premium"))
-		return	
+		return
 	}
 
 	if username != "" {
@@ -174,12 +184,13 @@ func giftsPruchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer,
 		session, _ := fsm.UserFSM.Get(callback.From.ID)
 		session.State = fsm.StateIdle
 		session.MessageID = callback.Message.Message().MessageID
-		if callback.From.Username != "" {
-			session.Username = callback.From.Username
+		username := normalizeUsername(callback.From.Username)
+		if username != "" {
+			session.Username = username
 		}
 		fsm.UserFSM.Set(callback.From.ID, session)
 
-		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.gifts.self").Format("username", callback.From.Username, "adamant_balance", currentUserBalance(callback.From.ID)), botpkg.GiftList(tr.Language(), page...))
+		utils.Edit(bot, callback.Message.Message(), tr.Get("menu.buy_list.gifts.self").Format("username", username, "adamant_balance", currentUserBalance(callback.From.ID)), botpkg.GiftList(tr.Language(), page...))
 	} else {
 		utils.EditKeyboard(bot, callback.Message.Message(), *botpkg.GiftList(tr.Language(), page...))
 	}
@@ -200,9 +211,9 @@ func changeLanguage(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer
 
 func starsPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, user ...string) {
 	utils.CallbackAnswer(bot, callback)
-	username := callback.From.Username
+	username := normalizeUsername(callback.From.Username)
 	if len(user) > 0 && user[0] != "" {
-		username = user[0]
+		username = normalizeUsername(user[0])
 	}
 
 	if username != "" {
@@ -226,33 +237,79 @@ func uzsPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, d
 
 func tonPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
 	product, amount, username, ok := utils.DivideOrderData(data)
-	if !ok || product != "stars" {
+	if !ok {
+		utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())
+		return
+	}
+	username = normalizeUsername(username)
+
+	usd, description, ok := tonOrderInfo(product, amount, username)
+	if !ok {
 		utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())
 		return
 	}
 
+	amountTON, err := services.ConvertUSDToTON(context.Background(), usd)
+	if err != nil {
+		log.Println(err)
+		utils.CallbackAnswer(bot, callback, tr.Get("error.critical_error").String())
+		return
+	}
+
+	memo := utils.GeneratePaymentData(product, amount, username, strconv.FormatFloat(amountTON, 'f', -1, 64), "ton")
+
 	utils.CallbackAnswer(bot, callback)
-	var amount_ton float32 = float32(amount)
-	utils.Edit(bot, callback.Message.Message(), tr.Get("payment.ton").Format("amount", amount, "username", username, "amount_ton", 12, "BANK", config.Cfg.Bank, "order_id", callback.From.ID), botpkg.PayTon(tr.Language(), utils.GenerateTONlink(config.Cfg.Bank, amount_ton, strconv.FormatInt(callback.From.ID, 10))))
+	utils.Edit(
+		bot,
+		callback.Message.Message(),
+		tr.Get("payment.ton").Format(
+			"description", description,
+			"amount_ton", strconv.FormatFloat(amountTON, 'f', -1, 64),
+			"wallet", config.Cfg.Bank,
+			"BANK", config.Cfg.Bank,
+			"order_id", memo,
+		),
+		botpkg.PayTon(tr.Language(), utils.GenerateTONlink(config.Cfg.Bank, amountTON, memo)),
+	)
+}
+
+func tonOrderInfo(product string, amount int, username string) (float64, string, bool) {
+	switch product {
+	case "stars":
+		if amount <= 0 {
+			return 0, "", false
+		}
+		return config.Cfg.Price * float64(amount),
+			fmt.Sprintf("%d Telegram Stars пользователю @%s", amount, username),
+			true
+	case "premium":
+		if amount <= 0 {
+			return 0, "", false
+		}
+		usd, _ := utils.PremiumToUsdCoin(strconv.Itoa(amount))
+		if usd <= 0 {
+			return 0, "", false
+		}
+		return usd,
+			fmt.Sprintf("Telegram Premium на %d мес. пользователю @%s", amount, username),
+			true
+	case "gifts":
+		if amount < 0 || amount >= len(botpkg.Gifts) {
+			return 0, "", false
+		}
+		return botpkg.Gifts[amount].Price,
+			fmt.Sprintf("Telegram Gift пользователю @%s", username),
+			true
+	}
+
+	return 0, "", false
 }
 
 func adamantPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
-	product, _, _, ok := utils.DivideOrderData(data)
-	if !ok || product != "stars" {
-		utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())
-		return
-	}
-
 	utils.CallbackAnswer(bot, callback, tr.Get("error.balance").String())
 }
 
 func cryptomusPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, data string) {
-	product, _, _, ok := utils.DivideOrderData(data)
-	if !ok || product != "stars" {
-		utils.CallbackAnswer(bot, callback, tr.Get("error.not_yet").String())
-		return
-	}
-
 	utils.CallbackAnswer(bot, callback)
 }
 
@@ -289,9 +346,9 @@ func cancelPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer
 func premiumDurationPurchase(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, length int) {
 	utils.CallbackAnswer(bot, callback)
 
-	username := callback.From.Username
+	username := normalizeUsername(callback.From.Username)
 	if savedUsername, ok := fsm.UserFSM.GetUsername(callback.From.ID); ok && savedUsername != "" {
-		username = savedUsername
+		username = normalizeUsername(savedUsername)
 	}
 
 	if username == "" {
@@ -320,9 +377,9 @@ func giftComment(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, g
 func giftWithoutComment(bot *api.Bot, callback *api.CallbackQuery, tr i18n.Localizer, giftID int, anonymous bool) {
 	utils.CallbackAnswer(bot, callback)
 
-	username := callback.From.Username
+	username := normalizeUsername(callback.From.Username)
 	if savedUsername, ok := fsm.UserFSM.GetUsername(callback.From.ID); ok && savedUsername != "" {
-		username = savedUsername
+		username = normalizeUsername(savedUsername)
 	}
 
 	if username == "" {

@@ -71,7 +71,7 @@
     }
   },
   "payment": {
-    "ton": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Invoice is valid for 30 minutes</b>\n\n<b>Order details <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n{amount} Telegram Stars to @{username} <tg-emoji emoji-id='6035084557378654059'>👤</tg-emoji>\n\n<b>Payment details <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nNetwork: TON <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nAmount: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nAddress: <code>{BANK}</code>\nComment (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Send the exact amount and comment to the specified address, otherwise the payment WILL NOT BE COUNTED</b>",
+    "ton": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Invoice is valid for 30 minutes</b>\n\n<b>Order details <tg-emoji emoji-id='5348127061191967344'>☑</tg-emoji></b>\n{description}\n\n<b>Payment details <tg-emoji emoji-id='5472250091332993630'>💳</tg-emoji></b>\nNetwork: TON <tg-emoji emoji-id='5471899089425667918'>💱</tg-emoji>\nAmount: <code>{amount_ton}</code> <tg-emoji emoji-id='5375296873982604963'>💰</tg-emoji>\nAddress: <code>{wallet}</code>\nComment (memo): <code>{order_id}</code>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Send the exact amount and comment to the specified address, otherwise the payment WILL NOT BE COUNTED</b>",
     "slow": {
       "usd": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Automatic payment via this method is not yet available</b>\n\nWe sincerely apologize and hope it will be available soon. In the meantime, you can top up your <b>Adamant Balance</b> via support below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>You can transfer any desired amount to the cards:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Visa: <code>4297140070403256</code> (F.G.)\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> MasterCard: <code>5259357077807353</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you do not contact support within half an hour of sending, your top-up WILL NOT BE COUNTED. Please also immediately send your receipt and Telegram ID (/id) for maximum processing speed</b>",
       "uzs": "<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> Automatic payment via this method is not yet available</b>\n\nWe sincerely apologize and hope it will be available soon. In the meantime, you can top up your <b>Adamant Balance</b> via support below <tg-emoji emoji-id='5348390385636883361'>⬇</tg-emoji>\n\n<b>You can transfer any desired amount to the cards:\n<tg-emoji emoji-id='5927169041595634481'>💳</tg-emoji> Uzcard: <code>5614685200470271</code> (F.G.)</b>\n\n<b><tg-emoji emoji-id='6030563507299160824'>❗️</tg-emoji> If you do not contact support within half an hour of sending, your top-up WILL NOT BE COUNTED. Please also immediately send your receipt and Telegram ID (/id) for maximum processing speed</b>"
@@ -107,7 +107,7 @@
     "yes": "Yes",
     "no": "No",
     "payment": {
-      "tonkeeper": "Pay in TONKeeper app",
+      "tonkeeper": "Pay via TONKeeper",
       "cryptomus": "Pay via Cryptomus"
     },
     "utils": {

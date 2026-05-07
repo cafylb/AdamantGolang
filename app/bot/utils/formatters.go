@@ -4,6 +4,7 @@ import (
 	config "adamant/app/bot/config"
 	"fmt"
 	"math"
+	"net/url"
 	"strconv"
 	"strings"
 )
@@ -16,9 +17,9 @@ func GenerateReferal(tgId int) string {
 	return fmt.Sprintf("t.me/%s?start=%d", config.Cfg.Username, tgId)
 }
 
-func GenerateTONlink(wallet string, amount_ton float32, comment string) string {
-	var nanoton int = int(amount_ton * float32(math.Pow(10, 9)))
-	return fmt.Sprintf("ton://transfer/%s?amount=%d&text=%s", wallet, nanoton, comment)
+func GenerateTONlink(wallet string, amount_ton float64, comment string) string {
+	nanoton := int64(math.Round(amount_ton * 1e9))
+	return fmt.Sprintf("ton://transfer/%s?amount=%d&text=%s", wallet, nanoton, url.QueryEscape(comment))
 }
 
 func GeneratePaymentData(product string, amount int, username string, amount_ton string, system string) string {
@@ -68,9 +69,13 @@ func StarsToUsdCoin(amount int) (float64, int) {
 
 func PremiumToUsdCoin(length string) (float64, int) {
 	switch length {
-	case "3": return 12.99, 1299
-	case "6": return 16.99, 1699
-	case "12": return 29.99, 2999
-	default: return 0.0, 0
+	case "3":
+		return 12.99, 1299
+	case "6":
+		return 16.99, 1699
+	case "12":
+		return 29.99, 2999
+	default:
+		return 0.0, 0
 	}
 }

@@ -327,22 +327,55 @@ func (client *Fragment) CheckPremium(ctx context.Context, username string, month
 	if client == nil {
 		return false, "", fmt.Errorf("%w: fragment client not initialized", ErrFragmentClient)
 	}
+	if err := client.IsFragmentConnected(); err != nil {
+		return false, "", err
+	}
+	if months <= 0 {
+		return false, "", fmt.Errorf("%w: premium months must be positive", ErrFragmentClient)
+	}
 
-	payload, err := client.postFragment(ctx, map[string]string{
+	username = strings.TrimLeft(strings.TrimSpace(username), "@")
+	if username == "" {
+		return false, "", nil
+	}
+
+	data := map[string]string{
 		"query":  username,
 		"months": strconv.Itoa(months),
 		"method": "searchPremiumGiftRecipient",
-	})
+	}
+
+	client.mu.Lock()
+	hash := client.hashV
+	client.mu.Unlock()
+	if hash == "" {
+		if err := client.RefreshHash(ctx); err != nil {
+			return false, "", err
+		}
+	}
+
+	payload, err := client.postFragment(ctx, data)
 	if err != nil {
 		return false, "", err
 	}
 
-	// Проверяем error до всего остального
 	if errText := anyToString(payload["error"]); errText != "" {
-		if strings.Contains(errText, "already subscribed") {
-			return true, "", nil
+		if errText == "Bad request" || errText == "Unknown error" {
+			if err := client.RefreshHash(ctx); err != nil {
+				return false, "", err
+			}
+			payload, err = client.postFragment(ctx, data)
+			if err != nil {
+				return false, "", err
+			}
+			errText = anyToString(payload["error"])
 		}
-		return false, "", fmt.Errorf("%w: %s", ErrFragmentClient, errText)
+		if strings.Contains(strings.ToLower(errText), "already subscribed") {
+			return true, username, nil
+		}
+		if errText != "" {
+			return false, "", fmt.Errorf("%w: %s", ErrFragmentClient, errText)
+		}
 	}
 
 	found, _ := payload["found"].(map[string]any)
@@ -350,12 +383,7 @@ func (client *Fragment) CheckPremium(ctx context.Context, username string, month
 		return false, "", nil
 	}
 
-	recipient := anyToString(found["recipient"])
-	if recipient == "" {
-		recipient = anyToString(found["username"])
-	}
-
-	return false, recipient, nil
+	return false, username, nil
 }
 
 func (client *Fragment) RefreshHash(ctx context.Context) error {
